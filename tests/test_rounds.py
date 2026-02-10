@@ -21,3 +21,19 @@ def test_resolve_inspection_opens_and_catches(monkeypatch):
     monkeypatch.setattr("core.merchants.Merchant.roll_bluff", lambda self: 1)
     opens, caught = resolve_inspection(s, m, decl, actual)
     assert opens is True and caught is True
+
+
+def test_resolve_inspection_records_contraband_when_slips(monkeypatch):
+    from core.rounds import RoundState
+
+    s = Sheriff(perception=1)
+    m = Merchant(id="m", name="M", personality="", lore="", tells_honest=[], tells_lying=[], bluff_skill=10)
+    decl = Declaration(good_id="apple", count=1)
+    actual = [SILK]
+    # Force sheriff roll low so he doesn't open
+    monkeypatch.setattr("core.rounds.random.randint", lambda a, b: 1)
+    rs = RoundState(merchant=m, bag_actual=actual, declaration=decl)
+    opens, caught = resolve_inspection(s, m, decl, actual, round_state=rs)
+    assert opens is False and caught is False
+    assert rs.contraband_passed_count == 1
+    assert rs.contraband_passed_value == SILK.value
