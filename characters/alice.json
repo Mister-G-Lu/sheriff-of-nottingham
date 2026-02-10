@@ -1,0 +1,10 @@
+{
+  "id": "alice",
+  "name": "Alice",
+  "personality": "Nervous but honest. Often looks at the ground.",
+  "lore": "A baker's daughter from the next village.",
+  "tells_honest": ["steady voice", "meets your eyes"],
+  "tells_lying": ["fidgets", "voice cracks"],
+  "bluff_skill": 3,
+  "portrait_file": "alice.txt"
+}

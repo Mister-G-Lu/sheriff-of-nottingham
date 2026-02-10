@@ -1,0 +1,10 @@
+{
+  "id": "cedric",
+  "name": "Cedric",
+  "personality": "Grumpy and direct. No time for games.",
+  "lore": "Blacksmith carrying tools and sometimes more.",
+  "tells_honest": ["short answers", "arms crossed"],
+  "tells_lying": ["avoids the question", "sweats"],
+  "bluff_skill": 5,
+  "portrait_file": "cedric.txt"
+}

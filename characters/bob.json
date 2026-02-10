@@ -1,0 +1,10 @@
+{
+  "id": "bob",
+  "name": "Bob",
+  "personality": "Smooth talker. Always has a smile.",
+  "lore": "Traveling spice trader with a shady past.",
+  "tells_honest": ["relaxed posture", "clear speech"],
+  "tells_lying": ["over-smiles", "talks too fast"],
+  "bluff_skill": 7,
+  "portrait_file": "bob.txt"
+}
