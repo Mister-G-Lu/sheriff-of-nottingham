@@ -1,10 +1,11 @@
 {
   "id": "alice",
   "name": "Alice",
-  "personality": "Nervous but honest. Often looks at the ground.",
-  "lore": "A baker's daughter from the next village.",
-  "tells_honest": ["steady voice", "meets your eyes"],
-  "tells_lying": ["fidgets", "voice cracks"],
+  "personality": "Soft-spoken, anxious about breaking rules but desperate to support her family.",
+  "lore": "A young baker's daughter from the next village who carries fresh loaves into the city each morning. She has grown up poor but honest, and the townsfolk trust her more than she trusts herself.",
+  "tells_honest": ["steady voice", "meets your eyes", "hands rest calmly on her basket"],
+  "tells_lying": ["fidgets with her apron", "voice cracks", "glances back at her cart"],
   "bluff_skill": 3,
-  "portrait_file": "alice.txt"
+  "portrait_file": "alice.txt",
+  "appearance": "Early 20s woman with flour-dusted cheeks, auburn hair in a loose braid, and a simple linen dress under a brown apron. She clutches a wicker basket overflowing with bread and apples, standing in front of the worn stone of Nottingham's gate at dawn."
 }

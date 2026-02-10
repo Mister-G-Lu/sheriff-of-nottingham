@@ -20,6 +20,7 @@ class Merchant:
     tells_lying: list[str]    # cues when lying
     bluff_skill: int = 5      # used vs Sheriff perception for lie detection
     portrait_file: Optional[str] = None  # e.g. "alice.txt"
+    appearance: str = ""      # visual description to help generate images
 
     def roll_bluff(self) -> int:
         """Roll for bluff (e.g. d10 + bluff_skill)."""
@@ -56,6 +57,7 @@ def load_merchants(limit: Optional[int] = None) -> list[Merchant]:
                 tells_lying=data.get("tells_lying", []),
                 bluff_skill=int(data.get("bluff_skill", 5)),
                 portrait_file=data.get("portrait_file"),
+                appearance=data.get("appearance", ""),
             )
             merchants.append(m)
         except (json.JSONDecodeError, KeyError) as e:

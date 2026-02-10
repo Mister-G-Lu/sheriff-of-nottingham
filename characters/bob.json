@@ -1,10 +1,11 @@
 {
   "id": "bob",
   "name": "Bob",
-  "personality": "Smooth talker. Always has a smile.",
-  "lore": "Traveling spice trader with a shady past.",
-  "tells_honest": ["relaxed posture", "clear speech"],
-  "tells_lying": ["over-smiles", "talks too fast"],
+  "personality": "Charming and loud, always spinning stories and jokes to keep people off-balance.",
+  "lore": "A traveling spice trader who has seen half the kingdom and been chased out of the other half. He insists he is reformed, but his stories change every time he tells them.",
+  "tells_honest": ["leans casually on his cart", "laughs easily", "makes eye contact while talking"],
+  "tells_lying": ["over-smiles and shows too many teeth", "talks too fast and changes subjects", "keeps one hand protectively on his satchel"],
   "bluff_skill": 7,
-  "portrait_file": "bob.txt"
+  "portrait_file": "bob.txt",
+  "appearance": "Middle-aged man with a trimmed black beard, a colorful patchwork cloak, and rings on several fingers. Small cloth pouches of spices hang from his belt, and a battered wooden cart piled with sacks stands behind him in a busy medieval market street."
 }

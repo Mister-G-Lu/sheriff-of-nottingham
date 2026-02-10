@@ -1,10 +1,11 @@
 {
   "id": "cedric",
   "name": "Cedric",
-  "personality": "Grumpy and direct. No time for games.",
-  "lore": "Blacksmith carrying tools and sometimes more.",
-  "tells_honest": ["short answers", "arms crossed"],
-  "tells_lying": ["avoids the question", "sweats"],
+  "personality": "Blunt, gruff, and proud of honest work, but tempted by the coin that smuggling can bring.",
+  "lore": "A seasoned blacksmith from the city forge who brings tools, nails, and horseshoes through the gate. Lately, rumors say he has been moving more than just iron.",
+  "tells_honest": ["short, direct answers", "arms crossed but relaxed", "meets your gaze without flinching"],
+  "tells_lying": ["avoids the question with a grunt", "sweat beads along his temples", "shifts his weight and looks past you"],
   "bluff_skill": 5,
-  "portrait_file": "cedric.txt"
+  "portrait_file": "cedric.txt",
+  "appearance": "Broad-shouldered man in a soot-stained tunic and leather apron, with scarred forearms and short dark hair. He stands before a wooden cart stacked with tools and iron bars, the faint glow of a distant forge lighting the stone walls of Nottingham behind him."
 }
