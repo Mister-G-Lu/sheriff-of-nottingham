@@ -9,8 +9,12 @@ For backward compatibility, commonly used classes are re-exported below.
 """
 
 # Re-export commonly used classes for backward compatibility
-from core.game.game_manager import run_game
-from core.game.game_rules import BAG_SIZE_LIMIT, STARTING_GOLD
+# Note: run_game is not imported here to avoid circular imports with ui.narration
+# Import it directly from core.game.game_manager when needed
+from core.constants import (
+    HAND_SIZE_LIMIT, BAG_SIZE_LIMIT, STARTING_GOLD, STARTING_REPUTATION,
+    STARTING_PERCEPTION, STARTING_AUTHORITY, STARTING_EXPERIENCE
+)
 from core.game.rounds import Declaration, resolve_inspection
 from core.game.end_game import show_end_game_summary
 
@@ -25,7 +29,7 @@ from core.mechanics.negotiation import (
     initiate_threat, merchant_respond_to_threat, sheriff_respond_to_bribe,
     merchant_respond_to_counter, resolve_negotiation, NegotiationOutcome, NegotiationState
 )
-from core.mechanics.black_market import BlackMarketContact, check_black_market_offer
+# black_market removed - feature not being implemented
 
 from core.systems.logger import log_error, log_warning, log_info, log_debug
 from core.systems.game_stats import GameStats
@@ -33,8 +37,9 @@ from core.systems.reputation import update_sheriff_reputation
 
 __all__ = [
     # Game management
-    'run_game', 'BAG_SIZE_LIMIT', 'STARTING_GOLD', 'Declaration', 'resolve_inspection',
-    'show_end_game_summary',
+    'HAND_SIZE_LIMIT', 'BAG_SIZE_LIMIT', 'STARTING_GOLD', 'STARTING_REPUTATION',
+    'STARTING_PERCEPTION', 'STARTING_AUTHORITY', 'STARTING_EXPERIENCE',
+    'Declaration', 'resolve_inspection', 'show_end_game_summary',
     # Players
     'Merchant', 'InformationBroker', 'load_merchants', 'Sheriff',
     'calculate_catch_rate', 'analyze_sheriff_detailed',
@@ -43,7 +48,6 @@ __all__ = [
     'handle_inspection', 'handle_pass_without_inspection',
     'initiate_threat', 'merchant_respond_to_threat', 'sheriff_respond_to_bribe',
     'merchant_respond_to_counter', 'resolve_negotiation', 'NegotiationOutcome', 'NegotiationState',
-    'BlackMarketContact', 'check_black_market_offer',
     # Systems
     'log_error', 'log_warning', 'log_info', 'log_debug',
     'GameStats', 'update_sheriff_reputation',

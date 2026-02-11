@@ -4,6 +4,7 @@ pygame>=2.5.0
 
 # Testing
 pytest>=7.0
+pytest-timeout>=2.1.0
 
 # Building executables (optional - only needed to create .exe/.app files)
 # pyinstaller>=5.0  # Uncomment to build standalone executables

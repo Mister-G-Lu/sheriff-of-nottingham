@@ -30,6 +30,10 @@ class VisualNovelUI:
         self.font_small = self.window.font_small
     
     # Window methods
+    def load_portrait_file(self, portrait_filename: str) -> bool:
+        """Load a portrait PNG directly by filename"""
+        return self.window.load_portrait_file(portrait_filename)
+    
     def load_portrait(self, character_name: str) -> bool:
         """Load a character portrait PNG"""
         return self.window.load_portrait(character_name)

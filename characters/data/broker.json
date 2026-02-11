@@ -8,7 +8,7 @@
   "bluff_skill": 9,
   "risk_tolerance": 7,
   "greed": 9,
-  "honesty_bias": 1,
+  "honesty_bias": 5,
   "portrait_file": "broker.png",
   "appearance": "A shadowy figure with a ledger and keen eyes, always taking notes."
 }

@@ -123,5 +123,6 @@ def analyze_sheriff_detailed(history: list[dict]) -> dict:
         'total_rounds': total_rounds,
         'lies_caught': lies_caught,
         'lies_successful': lies_successful,
-        'truths_inspected': truths_inspected
+        'truths_inspected': truths_inspected,
+        'history': history  # Include history for pattern detection
     }

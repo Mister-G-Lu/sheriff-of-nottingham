@@ -19,13 +19,7 @@ Keep this file focused on menu logic and display functions, not content storage.
 import sys
 import json
 from pathlib import Path
-
-# Check if we're using Pygame UI
-try:
-    from ui.pygame_ui import get_ui
-    USING_PYGAME = True
-except ImportError:
-    USING_PYGAME = False
+from ui.pygame_ui import get_ui
 
 
 def load_menu_content():
@@ -44,126 +38,47 @@ def load_menu_content():
         }
 
 
-def display_sheriff_image():
-    """Display the sheriff.png image as ASCII art."""
-    try:
-        from PIL import Image
-        
-        # Load sheriff image
-        sheriff_path = Path(__file__).parent.parent / "characters" / "sheriff.png"
-        
-        if not sheriff_path.exists():
-            return  # Skip if image not found
-        
-        with Image.open(sheriff_path) as img:
-            # Resize for terminal display
-            img.thumbnail((80, 40))
-            
-            # Convert to ASCII
-            ascii_art = image_to_ascii(img, width=80)
-            print(ascii_art)
-            
-    except ImportError:
-        # PIL not available, skip image
-        pass
-    except Exception:
-        # Any other error, skip image
-        pass
-
-
-def image_to_ascii(image, width=80):
-    """Convert PIL Image to ASCII art."""
-    # ASCII characters from darkest to lightest
-    ascii_chars = ['@', '#', 'S', '%', '?', '*', '+', ';', ':', ',', '.', ' ']
-    
-    # Resize image to fit width while maintaining aspect ratio
-    aspect_ratio = image.height / image.width
-    height = int(width * aspect_ratio * 0.55)  # 0.55 to account for character height
-    image = image.resize((width, height))
-    
-    # Convert to grayscale
-    image = image.convert('L')
-    
-    # Convert pixels to ASCII
-    pixels = image.getdata()
-    ascii_str = ''
-    for i, pixel in enumerate(pixels):
-        # Map pixel value (0-255) to ASCII character
-        ascii_str += ascii_chars[pixel // 25]
-        if (i + 1) % width == 0:
-            ascii_str += '\n'
-    
-    return ascii_str
-
-
 def show_title_card():
-    """Display the game title card with ASCII art."""
+    """Display the game title card."""
     content = load_menu_content()
-    
-    if USING_PYGAME:
-        # In Pygame mode, show split screen: title on left, sheriff portrait on right
-        ui = get_ui()
-        ui.show_title_screen(content['title_pygame'])
-    else:
-        # Terminal mode - show full ASCII art
-        print(content['title_ascii_art'], end='')
-        
-        # Display sheriff image with minimal spacing
-        print()  # Single newline
-        display_sheriff_image()
-        print()  # Single newline after image
+    ui = get_ui()
+    # Show split screen: title on left, sheriff portrait on right
+    ui.show_title_screen(content['title_pygame'])
 
 
 def show_main_menu():
     """Display the main menu and get player choice."""
-    if USING_PYGAME:
-        # Use Pygame choice buttons (title screen already displayed)
-        ui = get_ui()
-        choices = [
-            ('start', 'Start Game'),
-            ('help', 'How to Play'),
-            ('credits', 'Credits'),
-            ('exit', 'Exit')
-        ]
-        return ui.show_choices("", choices)
-    else:
-        # Terminal mode - use text input
-        print("    [1] Start Game")
-        print("    [2] How to Play")
-        print("    [3] Credits")
-        print("    [4] Exit")
-        print()
-        
-        while True:
-            choice = input("Enter your choice [1-4]: ").strip()
-            
-            if choice == '1':
-                return 'start'
-            elif choice == '2':
-                return 'help'
-            elif choice == '3':
-                return 'credits'
-            elif choice == '4':
-                return 'exit'
-            else:
-                print("Invalid choice. Please enter 1, 2, 3, or 4.")
+    ui = get_ui()
+    choices = [
+        ('start', 'Start Game'),
+        ('help', 'How to Play'),
+        ('credits', 'Credits'),
+        ('exit', 'Exit')
+    ]
+    return ui.show_choices("", choices)
 
 
 def show_how_to_play():
     """Display how to play instructions."""
     content = load_menu_content()
     how_to_play = content['how_to_play']
+    ui = get_ui()
     
-    # Build the instructions text from JSON data
-    instructions = f"\n{how_to_play['header']}\n\n"
+    # Clear screen and display header
+    ui.clear_text()
+    ui.display_text(how_to_play['header'], clear_previous=False)
+    ui.display_text("", clear_previous=False)  # Empty line
     
+    # Display each section
     for section in how_to_play['sections']:
-        instructions += f"{section['title']}\n"
-        instructions += f"   {section['content']}\n\n"
+        ui.display_text(section['title'], clear_previous=False)
+        # Split multi-line content
+        for line in section['content'].split('\n'):
+            ui.display_text(f"   {line}", clear_previous=False)
+        ui.display_text("", clear_previous=False)  # Empty line between sections
     
-    instructions += f"{how_to_play['footer']}\n"
-    
-    print(instructions)
+    # Display footer and wait for input
+    ui.display_text(how_to_play['footer'], clear_previous=False)
     input()
 
 
@@ -171,33 +86,40 @@ def show_credits():
     """Display game credits."""
     content = load_menu_content()
     credits_data = content['credits']
+    ui = get_ui()
     
-    # Build the credits text from JSON data
-    credits = f"\n{credits_data['header']}\n\n"
-    credits += f"    {credits_data['title']}\n\n"
+    # Clear screen and display header
+    ui.clear_text()
+    ui.display_text(credits_data['header'], clear_previous=False)
+    ui.display_text("", clear_previous=False)  # Empty line
     
+    # Display title
+    for line in credits_data['title'].split('\n'):
+        ui.display_text(f"    {line}", clear_previous=False)
+    ui.display_text("", clear_previous=False)  # Empty line
+    
+    # Display each section
     for section in credits_data['sections']:
-        credits += f"    {section['title']}\n"
-        credits += f"       {section['content']}\n\n"
+        ui.display_text(f"    {section['title']}", clear_previous=False)
+        # Split multi-line content
+        for line in section['content'].split('\n'):
+            ui.display_text(f"       {line}", clear_previous=False)
+        ui.display_text("", clear_previous=False)  # Empty line between sections
     
-    credits += f"    {credits_data['version']}\n    \n"
-    credits += f"{credits_data['footer']}\n"
-    
-    print(credits)
+    # Display version and footer
+    ui.display_text(f"    {credits_data['version']}", clear_previous=False)
+    ui.display_text("", clear_previous=False)
+    ui.display_text(credits_data['footer'], clear_previous=False)
     input()
 
 
 def run_menu():
     """Run the main menu loop."""
-    import os
+    ui = get_ui()
     
     while True:
         # Clear screen
-        if USING_PYGAME:
-            ui = get_ui()
-            ui.clear_text()
-        else:
-            os.system('clear' if os.name != 'nt' else 'cls')
+        ui.clear_text()
         
         # Show title card
         show_title_card()

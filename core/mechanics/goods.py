@@ -33,9 +33,9 @@ CHICKEN = Good("chicken", "Chicken", GoodKind.LEGAL, 4)
 
 # Contraband (red)
 SILK = Good("silk", "Silk", GoodKind.CONTRABAND, 6)
-PEPPER = Good("pepper", "Pepper", GoodKind.CONTRABAND, 6)
-MEAD = Good("mead", "Mead", GoodKind.CONTRABAND, 7)
-CROSSBOW = Good("crossbow", "Crossbow", GoodKind.CONTRABAND, 8)
+PEPPER = Good("pepper", "Pepper", GoodKind.CONTRABAND, 8)
+MEAD = Good("mead", "Mead", GoodKind.CONTRABAND, 10)
+CROSSBOW = Good("crossbow", "Crossbow", GoodKind.CONTRABAND, 15)
 
 ALL_LEGAL: tuple[Good, ...] = (APPLE, CHEESE, BREAD, CHICKEN)
 ALL_CONTRABAND: tuple[Good, ...] = (SILK, PEPPER, MEAD, CROSSBOW)

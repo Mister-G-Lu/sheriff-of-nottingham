@@ -118,9 +118,15 @@ class PygameInput:
                     pygame.quit()
                     sys.exit()
                 
-                # Handle scrolling while waiting for choice
+                # Ignore scroll events when showing choice buttons
+                # (no text to scroll on menu screen)
                 if event.type == pygame.MOUSEWHEEL:
-                    self.text_display._handle_scroll(event.y)
+                    # Only allow scrolling if there's actual text content to scroll
+                    # Check if we have more text lines than can fit in the display
+                    max_lines = (TEXT_BOX_HEIGHT - 40) // (FONT_SIZE_NORMAL + 5)
+                    if len(self.text_display.text_lines) > max_lines:
+                        self.text_display._handle_scroll(event.y)
+                    # Otherwise, ignore the scroll event
                 
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     mouse_pos = pygame.mouse.get_pos()

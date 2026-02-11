@@ -3,7 +3,7 @@
   "name": "Garrett the Veteran",
   "intro": "Stoic and unreadable, speaks little and reveals less. A former soldier who's seen it all.\n\nA grizzled war veteran who now trades in weapons and tools. He's been interrogated by far worse than the Sheriff and has nerves of steel. His poker face is legendary, and he never shows fear or guilt. He smuggles weapons to rebels but does so with military precision.",
   "tells_honest": ["stands at attention", "brief nod", "direct eye contact"],
-  "tells_lying": ["his hand clenching harder than normal", "a brief nod", "seeming to look somewhere else"],
+  "tells_lying": ["his hand clenching", "a brief nod", "seeming to look somewhere else"],
   "bluff_skill": 7,
   "risk_tolerance": 8,
   "greed": 6,

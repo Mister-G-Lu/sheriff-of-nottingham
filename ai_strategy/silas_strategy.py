@@ -45,100 +45,271 @@ class SilasStrategy:
     """
     
     @staticmethod
-    def should_tell_truth(analysis: dict) -> bool:
+    def detect_corrupt_sheriff(history: list[dict]) -> bool:
         """
-        Determine if Silas should tell the truth this round.
+        Detect if sheriff is "corrupt & greedy" - accepts all bribes.
         
-        Silas tells the truth when:
-        1. Sheriff is catching most smugglers (>60% catch rate)
-        2. Sheriff is very aggressive with inspections (>70% inspection rate)
+        Pattern: Sheriff accepts 90%+ of bribes offered.
+        Against corrupt sheriffs, smuggling is LESS profitable because:
+        - Bribes always cost gold (even if minimal)
+        - Honest goods have no cost
+        - Cumulative bribe costs reduce profit margins
         
-        This is a defensive strategy - when the environment is too dangerous,
-        Silas plays it safe and waits for better opportunities.
+        Returns:
+            True if sheriff appears to be corrupt (accepts all bribes)
+        """
+        if len(history) < 5:
+            return False
+        
+        recent = history[-10:] if len(history) >= 10 else history
+        bribed_encounters = [h for h in recent if h.get('bribe_offered', 0) > 0]
+        
+        if len(bribed_encounters) < 3:
+            return False
+        
+        bribes_accepted = sum(1 for h in bribed_encounters if h.get('bribe_accepted', False))
+        acceptance_rate = bribes_accepted / len(bribed_encounters)
+        
+        # Corrupt: accepts 90%+ of bribes
+        return acceptance_rate >= 0.9
+    
+    @staticmethod
+    def detect_adaptive_sheriff(history: list[dict]) -> bool:
+        """
+        Detect if sheriff is "adaptive" - changes inspection rate based on results.
+        
+        Pattern: Inspection rate varies significantly over time (not consistent).
+        Adaptive sheriffs inspect more when catching smugglers, less when not.
+        
+        Returns:
+            True if sheriff appears to be adaptive
+        """
+        if len(history) < 10:
+            return False
+        
+        # Split history into two halves
+        mid = len(history) // 2
+        first_half = history[:mid]
+        second_half = history[mid:]
+        
+        # Calculate inspection rates for each half
+        first_inspections = sum(1 for h in first_half if h.get('opened', False))
+        first_rate = first_inspections / len(first_half) if first_half else 0.5
+        
+        second_inspections = sum(1 for h in second_half if h.get('opened', False))
+        second_rate = second_inspections / len(second_half) if second_half else 0.5
+        
+        # Adaptive: inspection rate changes by 20%+ between halves
+        return abs(first_rate - second_rate) >= 0.2
+    
+    @staticmethod
+    def calculate_strategy_expected_value(history: list[dict], strategy_type: str) -> float:
+        """
+        Calculate expected profit for a given strategy based on historical data.
         
         Args:
-            analysis: Sheriff behavior analysis from analyze_sheriff_behavior()
+            history: List of previous encounters
+            strategy_type: Either 'honest' or 'smuggling'
+        
+        Returns:
+            float: Expected profit in gold from the strategy
+        """
+        if len(history) < 5:
+            return 8.0  # Default: assume ~8g average
+        
+        recent = history[-15:] if len(history) >= 15 else history
+        
+        # Filter attempts based on strategy type
+        if strategy_type == 'honest':
+            attempts = [h for h in recent if not h.get('contraband', False)]
+            min_attempts = 2
+        else:  # smuggling
+            attempts = [h for h in recent if h.get('contraband', False)]
+            min_attempts = 3
+        
+        if len(attempts) < min_attempts:
+            return 8.0  # Not enough data, use default
+        
+        # Calculate average profit
+        total_profit = sum(h.get('gold_earned', 0) - h.get('gold_lost', 0) for h in attempts)
+        avg_profit = total_profit / len(attempts)
+        
+        return max(5.0, avg_profit) if strategy_type == 'honest' else avg_profit
+    
+    @staticmethod
+    def calculate_smuggling_profitability(history: list[dict]) -> float:
+        """
+        Compare smuggling vs honest strategies using expected value.
+        
+        Returns:
+            float: Profitability ratio (smuggling_EV / honest_EV)
+                  >1.0 = smuggling more profitable
+                  <1.0 = honest more profitable
+        """
+        honest_EV = SilasStrategy.calculate_strategy_expected_value(history, 'honest')
+        smuggling_EV = SilasStrategy.calculate_strategy_expected_value(history, 'smuggling')
+        
+        # Calculate profitability ratio
+        profitability_ratio = smuggling_EV / honest_EV if honest_EV > 0 else 1.0
+        
+        # Clamp to reasonable range (0.1 to 3.0)
+        return max(0.1, min(3.0, profitability_ratio))
+    
+    @staticmethod
+    def should_tell_truth(analysis: dict) -> bool:
+        """
+        Decide if Silas should tell the truth based on sheriff behavior.
+        
+        Silas uses data-driven analysis to determine if smuggling is profitable.
+        Key insight: Don't just look at catch rate, look at actual profitability.
+        
+        Args:
+            analysis: Sheriff behavior analysis
             
         Returns:
-            bool: True if Silas should tell truth, False if he should lie
+            bool: True if should tell truth, False if should smuggle
         """
         catch_rate = analysis['catch_rate']
         inspection_rate = analysis['inspection_rate']
+        history = analysis.get('history', [])
         
-        # If sheriff is catching most smugglers, too dangerous to lie
+        # FIRST: Calculate if smuggling is actually profitable
+        profitability = SilasStrategy.calculate_smuggling_profitability(history)
+        
+        # If smuggling is very unprofitable (<0.5), stay honest most of the time
+        if profitability < 0.5:
+            return random.random() < 0.9  # 90% honest
+        
+        # If smuggling is unprofitable (0.5-0.8), stay honest often
+        if profitability < 0.8:
+            return random.random() < 0.75  # 75% honest
+        
+        # Check for corrupt sheriff pattern
+        # Against corrupt sheriffs, stay honest MORE often (70% of the time)
+        # because cumulative bribe costs make smuggling unprofitable
+        if SilasStrategy.detect_corrupt_sheriff(history):
+            return random.random() < 0.7  # 70% chance to stay honest
+        
+        # Check for adaptive sheriff pattern
+        is_adaptive = SilasStrategy.detect_adaptive_sheriff(history)
+        
+        if is_adaptive:
+            # Against adaptive sheriffs, use cautious dynamic strategy
+            # Key insight: Frequent smuggling triggers adaptive response
+            # Better to smuggle LESS but at optimal times
+            
+            # Adjust base honesty based on profitability
+            if profitability > 1.3:
+                base_honesty = 0.4  # Very profitable, smuggle more
+            elif profitability > 1.0:
+                base_honesty = 0.6  # Moderately profitable
+            else:
+                base_honesty = 0.75  # Barely profitable, be cautious
+            
+            if inspection_rate > 0.6:
+                # Sheriff is aggressive - very cautious
+                return random.random() < min(0.85, base_honesty + 0.25)
+            elif inspection_rate > 0.5:
+                # Sheriff is moderately aggressive - cautious
+                return random.random() < min(0.75, base_honesty + 0.15)
+            elif inspection_rate > 0.4:
+                # Sheriff is moderate - balanced
+                return random.random() < base_honesty
+            elif inspection_rate > 0.3:
+                # Sheriff is lenient - opportunistic
+                return random.random() < max(0.3, base_honesty - 0.15)
+            else:
+                # Sheriff is very lenient - exploit it
+                return random.random() < max(0.2, base_honesty - 0.25)
+        
+        # Non-adaptive sheriff - use profitability-based logic
+        # If smuggling is profitable (>1.0), be more aggressive
+        if profitability > 1.2:
+            # Very profitable - smuggle more often
+            if catch_rate > 0.7:
+                return True  # Still too risky
+            elif inspection_rate > 0.8:
+                return True  # Too much inspection
+            else:
+                return random.random() < 0.3  # 30% honest, 70% smuggle
+        
+        # Standard logic for moderate profitability
         if catch_rate > 0.6:
             return True
         
-        # If sheriff is very aggressive with inspections, play it safe
         if inspection_rate > 0.7:
             return True
         
+        # Otherwise, smuggle!
         return False
     
     @staticmethod
-    def calculate_optimal_contraband_count(analysis: dict) -> int:
+    def select_contraband_strategy(analysis: dict) -> tuple[int, any]:
         """
-        Calculate how many contraband items Silas should smuggle.
+        Select contraband count and value based on risk assessment.
         
-        Silas scales his risk based on how lenient the sheriff is:
-        - Very lenient sheriff: 3-4 items (moderate risk, within 6-card limit)
-        - Active sheriff: 2-3 items (conservative)
-        - Dangerous sheriff: 1-2 items (very conservative)
-        
-        Always respects the 6-card bag limit.
+        Silas scales both quantity and value based on sheriff danger level.
         
         Args:
             analysis: Sheriff behavior analysis
             
         Returns:
-            int: Number of contraband items to smuggle (1-4, within bag limit)
+            tuple: (count, contraband_good)
         """
         catch_rate = analysis['catch_rate']
         inspection_rate = analysis['inspection_rate']
-        
-        # Sheriff is very lenient - can take moderate risk (3-4 items)
-        if catch_rate < 0.3 and inspection_rate < 0.4:
-            return min(random.randint(3, 4), BAG_SIZE_LIMIT)
-        
-        # Sheriff is somewhat active - stay conservative (2-3 items)
-        elif catch_rate < 0.5:
-            return min(random.randint(2, 3), BAG_SIZE_LIMIT)
-        
-        # Sheriff is dangerous - very conservative (1-2 items)
-        return min(random.randint(1, 2), BAG_SIZE_LIMIT)
-    
-    @staticmethod
-    def select_contraband_value(analysis: dict) -> object:
-        """
-        Select which contraband item to smuggle based on risk assessment.
-        
-        Silas chooses contraband value based on how safe the environment is:
-        - Very safe: Highest value items
-        - Moderate: Mid-high value items
-        - Risky: Mid value items only
-        
-        This ensures his bribe offers scale appropriately with risk.
-        
-        Args:
-            analysis: Sheriff behavior analysis
-            
-        Returns:
-            Good: The contraband item to smuggle
-        """
-        catch_rate = analysis['catch_rate']
         contraband_options = sorted(ALL_CONTRABAND, key=lambda g: g.value)
         
-        if catch_rate < 0.2:
-            # Very safe - go for highest value
-            return contraband_options[-1]
-        elif catch_rate < 0.4:
-            # Moderate safety - mid-high value
-            index = len(contraband_options) * 2 // 3
-            return contraband_options[index]
+        # Determine risk level and select accordingly
+        if catch_rate < 0.3 and inspection_rate < 0.4:
+            # Very safe: 3-4 items, high value
+            count = min(random.randint(3, 4), BAG_SIZE_LIMIT)
+            contraband = random.choice(contraband_options[len(contraband_options) * 2 // 3:])
+        elif catch_rate < 0.5:
+            # Moderate: 2-3 items, mid-high value
+            count = min(random.randint(2, 3), BAG_SIZE_LIMIT)
+            mid_start = len(contraband_options) // 3
+            mid_end = len(contraband_options) * 2 // 3
+            contraband = random.choice(contraband_options[mid_start:mid_end])
         else:
-            # Risky - stick to mid value
-            index = len(contraband_options) // 2
-            return contraband_options[index]
+            # Dangerous: 1-2 items, lower value
+            count = min(random.randint(1, 2), BAG_SIZE_LIMIT)
+            contraband = contraband_options[random.randint(0, len(contraband_options) // 2)]
+        
+        return count, contraband
+    
+    @staticmethod
+    def detect_trigger_happy_sheriff(history: list[dict]) -> bool:
+        """
+        Detect if sheriff is "trigger happy" - inspects whenever bribed.
+        
+        Pattern: Sheriff inspects all merchants who offer bribes, but lets others pass.
+        This is exploitable with the "honest bribe trick".
+        
+        Returns:
+            True if sheriff appears to be trigger happy
+        """
+        if len(history) < 5:
+            return False  # Need enough data
+        
+        recent = history[-10:] if len(history) >= 10 else history
+        
+        # Look for bribes in history (merchants who offered bribes)
+        bribed_encounters = [h for h in recent if h.get('bribe_offered', 0) > 0 or h.get('bribe_accepted', False)]
+        non_bribed_encounters = [h for h in recent if h.get('bribe_offered', 0) == 0 and not h.get('bribe_accepted', False)]
+        
+        if len(bribed_encounters) < 3:
+            return False  # Not enough bribe data
+        
+        # Check if sheriff inspects ALL bribes but lets non-bribes pass
+        bribes_inspected = sum(1 for h in bribed_encounters if h.get('opened', False))
+        non_bribes_inspected = sum(1 for h in non_bribed_encounters if h.get('opened', False))
+        
+        # Trigger happy: inspects 80%+ of bribes, but only 30% or less of non-bribes
+        bribe_inspection_rate = bribes_inspected / len(bribed_encounters) if bribed_encounters else 0
+        non_bribe_inspection_rate = non_bribes_inspected / len(non_bribed_encounters) if non_bribed_encounters else 0
+        
+        return bribe_inspection_rate >= 0.8 and non_bribe_inspection_rate <= 0.3
     
     @staticmethod
     def choose_declaration_with_history(history: list[dict]) -> dict:
@@ -161,6 +332,32 @@ class SilasStrategy:
         # Step 1: Analyze sheriff's behavior using shared utility
         analysis = analyze_sheriff_detailed(history)
         
+        # Step 1.5: Check for "trigger happy" sheriff pattern
+        is_trigger_happy = SilasStrategy.detect_trigger_happy_sheriff(history)
+        
+        if is_trigger_happy:
+            # EXPLOIT: Use "honest bribe trick"
+            # Carry honest goods, declare honestly, but offer small bribe
+            # Sheriff will inspect (because bribe), find honest goods, and pay full value!
+            # 
+            # Example: Carry 3x Cheese (9g), declare 3x Cheese, bribe 2g
+            # Sheriff inspects → finds honest → Silas gets 9g goods + keeps 2g bribe = 11g profit!
+            
+            # Choose high-value legal goods to maximize profit
+            legal_by_value = sorted(ALL_LEGAL, key=lambda g: g.value, reverse=True)
+            high_value_legal = random.choice(legal_by_value[:2])  # Top 2 highest value
+            
+            count = min(random.randint(3, 4), BAG_SIZE_LIMIT)  # Maximize value
+            
+            return {
+                "declared_id": high_value_legal.id,
+                "count": count,
+                "actual_ids": [high_value_legal.id] * count,
+                "lie": False,  # Honest!
+                "lie_type": "none",
+                "trigger_happy_exploit": True  # Flag for bribe calculation
+            }
+        
         # Step 2: Decide if environment is too dangerous
         if SilasStrategy.should_tell_truth(analysis):
             # Play it safe - tell the truth
@@ -176,15 +373,12 @@ class SilasStrategy:
             }
         
         # Step 3: Environment is safe enough to smuggle
-        # Calculate optimal risk level
-        contraband_count = SilasStrategy.calculate_optimal_contraband_count(analysis)
+        # Select contraband count and value based on risk
+        contraband_count, contraband = SilasStrategy.select_contraband_strategy(analysis)
         
-        # Step 4: Select contraband based on risk assessment
-        contraband = SilasStrategy.select_contraband_value(analysis)
-        
-        # Step 5: Build declaration (within bag limit)
+        # Step 4: Build declaration (within bag limit)
         declared = random.choice([g.id for g in ALL_LEGAL])
-        actual_ids = [contraband.id] * min(contraband_count, BAG_SIZE_LIMIT)
+        actual_ids = [contraband.id] * contraband_count
         
         return {
             "declared_id": declared,
@@ -234,12 +428,62 @@ def get_silas_declaration(history: list[dict] | None = None) -> dict:
     This is the function that should be called by the InformationBroker class.
     It handles both first-round and subsequent-round logic.
     
+    Silas now uses the deck system with intelligent redraws based on sheriff behavior:
+    - Against corrupt/trigger happy: Redraws for high-value legal goods (honest bribe trick)
+    - Against lenient sheriffs: Redraws for high-value contraband (maximize profit)
+    - Against aggressive sheriffs: Plays it safe with whatever hand he gets
+    
     Args:
         history: Optional list of previous encounters. None for first round.
         
     Returns:
         dict: What Silas declares and actually carries
     """
+    # Import deck functions
+    from core.mechanics.deck import draw_hand, analyze_hand, should_redraw_for_silas, redraw_cards
+    
+    # Draw initial hand
+    hand = draw_hand(hand_size=7)
+    
+    # If we have history, use Silas's smart redraw logic
+    if history:
+        # Analyze sheriff behavior
+        sheriff_analysis = analyze_sheriff_detailed(history)
+        sheriff_analysis['history'] = history  # Include history for detection
+        
+        # Determine if Silas should redraw
+        num_to_redraw = should_redraw_for_silas(hand, sheriff_analysis)
+        if num_to_redraw > 0:
+            # Determine Silas's redraw preference based on sheriff type
+            history = sheriff_analysis.get('history', [])
+            
+            # Detect sheriff patterns
+            is_trigger_happy = False
+            is_corrupt = False
+            if len(history) >= 5:
+                bribed = [h for h in history[-10:] if h.get('bribe_offered', 0) > 0]
+                if len(bribed) >= 3:
+                    inspected_bribes = sum(1 for h in bribed if h.get('opened', False))
+                    is_trigger_happy = (inspected_bribes / len(bribed)) >= 0.9
+                    
+                    accepted_bribes = sum(1 for h in bribed if h.get('bribe_accepted', False))
+                    is_corrupt = (accepted_bribes / len(bribed)) >= 0.9
+            
+            # Apply intelligent discard based on sheriff type
+            if is_trigger_happy:
+                # Keep legal goods (especially high-value), discard contraband
+                hand = redraw_cards(hand, num_to_redraw, prefer_legal=True, prefer_high_value=True)
+            elif is_corrupt:
+                # Keep contraband (especially high-value), discard legal goods
+                hand = redraw_cards(hand, num_to_redraw, prefer_contraband=True)
+            else:
+                # Keep high-value cards regardless of type
+                hand = redraw_cards(hand, num_to_redraw, prefer_high_value=True)
+    
+    # Analyze the final hand
+    hand_analysis = analyze_hand(hand)
+    
+    # Make decision based on hand and history
     if not history:
         return SilasStrategy.choose_declaration_first_round()
     else:

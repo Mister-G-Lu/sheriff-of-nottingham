@@ -5,17 +5,10 @@ Accessible via button on right side of screen
 
 import pygame
 from core.mechanics.goods import ALL_LEGAL, ALL_CONTRABAND
-
-# Colors
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-GREEN = (0, 255, 0)
-RED = (255, 0, 0)
-DARK_GREEN = (0, 180, 0)
-DARK_RED = (180, 0, 0)
-GRAY = (128, 128, 128)
-DARK_GRAY = (50, 50, 50)
-LIGHT_GRAY = (200, 200, 200)
+from core.constants import (
+    BLACK, WHITE, GREEN, RED, DARK_GREEN, DARK_RED,
+    GRAY, DARK_GRAY, LIGHT_GRAY
+)
 
 
 class PriceMenu:

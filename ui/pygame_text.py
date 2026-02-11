@@ -243,13 +243,14 @@ class PygameText:
         self.window.clear_screen()
         self.window.render_portrait()
         
-        # Render stats bar at top (before text box so it's always visible)
+        # Render stats bar and price menu at top (before text box so they're always visible)
         try:
             from ui.pygame_ui import get_ui
             ui = get_ui()
             ui.stats_bar.render()
+            ui.price_menu.render()  # Render price menu button
         except:
-            pass  # Stats bar not available
+            pass  # Stats bar/price menu not available
         
         # Draw text box background
         pygame.draw.rect(self.window.screen, DARK_GRAY, 

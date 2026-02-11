@@ -24,6 +24,18 @@ os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "1"
 
 import sys
 import builtins
+import logging
+
+# Set up error logging FIRST (before any other imports)
+from core.utils.error_logger import (
+    setup_error_logging, install_exception_handler, 
+    cleanup_old_logs, log_game_event
+)
+
+# Initialize logging system
+main_log, error_log = setup_error_logging()
+install_exception_handler()
+cleanup_old_logs(keep_count=10)  # Keep last 10 log files
 
 # Initialize Pygame UI
 from ui.pygame_ui import get_ui, close_ui
@@ -63,8 +75,11 @@ if __name__ == "__main__":
     warnings.filterwarnings('ignore')
     
     try:
+        log_game_event("startup", "Initializing game")
+        
         # Initialize Pygame UI
         ui = get_ui()
+        log_game_event("startup", "UI initialized")
         
         # Clear screen and show menu
         ui.clear_text()
@@ -73,10 +88,14 @@ if __name__ == "__main__":
         should_start = run_menu()
         
         if should_start:
+            log_game_event("game_start", "Starting new game")
             # Clear screen before starting game
             ui.clear_text()
             # Start the game
             run_game()
+            log_game_event("game_end", "Game completed normally")
+        else:
+            log_game_event("menu", "User exited from menu")
         
         # Keep window open after game ends
         ui.display_text("\n[Game ended. Close the window to exit.]", clear_previous=False)
@@ -89,10 +108,18 @@ if __name__ == "__main__":
                 if event.type == pygame.QUIT:
                     running = False
             ui.clock.tick(60)
+        
+        log_game_event("shutdown", "Game closed normally")
     
     except Exception as e:
-        _original_print(f"Error: {e}")
+        logging.error("Fatal error in main game loop", exc_info=e)
+        _original_print(f"\nFATAL ERROR: {e}")
+        _original_print(f"Check logs directory for details: {main_log}")
         import traceback
         traceback.print_exc()
     finally:
+        log_game_event("cleanup", "Cleaning up resources")
         close_ui()
+        logging.info("=" * 70)
+        logging.info("Sheriff of Nottingham - Session Ended")
+        logging.info("=" * 70)

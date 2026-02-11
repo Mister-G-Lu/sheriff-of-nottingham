@@ -8,7 +8,8 @@ import os
 from pathlib import Path
 
 # Add project root to path
-project_root = Path(__file__).parent.parent
+# __file__ is in tests/demos/, so parent.parent gets us to project root
+project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
 # Suppress pygame welcome message

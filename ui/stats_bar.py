@@ -5,19 +5,13 @@ Stats Bar - Persistent display of sheriff and game stats at top of screen
 import pygame
 from typing import Optional
 
-# Color definitions
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-GOLD = (255, 215, 0)
-GREEN = (0, 200, 0)
-RED = (200, 0, 0)
-GRAY = (128, 128, 128)
-DARK_GRAY = (40, 40, 40)
-
-# Stats bar layout
-STATS_BAR_HEIGHT = 40
-STATS_BAR_PADDING = 10
-STATS_BAR_MARGIN = 5
+from core.constants import (
+    # Colors
+    WHITE, BLACK, GOLD, GREEN, RED, GRAY, DARK_GRAY,
+    # Layout
+    STATS_BAR_HEIGHT, STATS_BAR_PADDING, STATS_BAR_MARGIN,
+    SCREEN_WIDTH
+)
 
 
 class StatsBar:

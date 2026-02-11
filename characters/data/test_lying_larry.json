@@ -1,0 +1,13 @@
+{
+  "id": "lying-larry",
+  "name": "Lying Larry",
+  "intro": "A notorious smuggler who lies as easily as he breathes.\n\nLarry's entire life is built on deception. He once tried to sell 'dragon eggs' (painted rocks) to a wizard. His greed knows no bounds, and he'll smuggle anything if the price is right. The only honest thing about him is his dishonesty.",
+  "tells_honest": ["nervous laughter", "can't stop fidgeting", "sweats profusely"],
+  "tells_lying": ["smooth as silk", "confident smile", "casual demeanor"],
+  "bluff_skill": 10,
+  "risk_tolerance": 10,
+  "greed": 10,
+  "honesty_bias": 1,
+  "portrait_file": "trader.png",
+  "appearance": "A shifty-eyed man in flashy clothes, with a wide grin and a bag that's suspiciously heavy. He has the look of someone who's always planning their next scheme."
+}

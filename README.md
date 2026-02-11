@@ -138,13 +138,34 @@ Create `characters/data/yourmerchant.json`:
 
 ### Testing
 
-```bash
-# Run negotiation tests
-python tests/test_negotiation.py
+**📊 Current Test Coverage: ~19%** | [View Full Testing Guide](TESTING.md)
 
-# Test specific merchant strategies
-python -c "from core.merchants import load_merchants; print(load_merchants())"
+```bash
+# Run all tests
+pytest
+
+# Run tests with coverage report
+pytest --cov=. --cov-report=term-missing
+
+# Run tests with HTML coverage report
+pytest --cov=. --cov-report=html
+open htmlcov/index.html
+
+# Run specific test modules
+pytest tests/unit/core/        # Core game logic tests
+pytest tests/unit/ui/          # UI component tests
+pytest tests/unit/ai_strategy/ # AI strategy tests
 ```
+
+**Test Organization:**
+- `tests/unit/core/` - Core game logic (game_manager, mechanics, players)
+- `tests/unit/ui/` - UI components (menu, pygame, stats)
+- `tests/unit/ai_strategy/` - AI strategy tests
+- `tests/README.md` - Detailed testing documentation
+
+**Coverage Goals:**
+- Short-term: 40%+ overall coverage
+- Focus areas: UI module (0%), Game Manager (9%), Black Market (14%)
 
 ## 📚 Key Files for Development
 
@@ -192,6 +213,7 @@ Multiplayer - servers are hard to manage
 
 - Save/load game state - encryption how? Secret obtained from file metadata?
 - Merchant/Sheriff reputation across sessions
+- "Black Market" who encourages bribery and accepting contraband to restore reputation
 
 ---
 

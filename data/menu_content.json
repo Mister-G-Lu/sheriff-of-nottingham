@@ -28,7 +28,7 @@
       },
       {
         "title": "💡 TIPS:",
-        "content": "• Watch for tells - they hint at honesty or deception\n• Cautious merchants bribe even with legal goods\n• Bold merchants sometimes refuse to bribe entirely\n• Bribes are based on goods value and personality\n• Build reputation to become more intimidating"
+        "content": "• Watch for tells - they hint at honesty or deception\n• Cautious merchants bribe even with legal goods\n• Bold merchants sometimes refuse to bribe entirely\n• Bribes are based on goods value and personality\n• Build reputation to help win the game"
       }
     ],
     "footer": "Press Enter to return to menu..."
@@ -38,6 +38,10 @@
     "header": "╔═══════════════════════════════════════════════════════════════════════════╗\n║                              CREDITS                                      ║\n╚═══════════════════════════════════════════════════════════════════════════╝",
     "title": "SHERIFF OF NOTTINGHAM\nInteractive Inspector Game",
     "sections": [
+      {
+        "title": "Designer: ",
+        "content": "seldiora, also known as 9spaceking"
+      },
       {
         "title": "🎮 Game Design:",
         "content": "Inspired by the board game \"Sheriff of Nottingham\""
@@ -51,19 +55,15 @@
         "content": "• Threat-based negotiation system\n• Proactive bribe offers\n• Multi-round haggling\n• AI merchant decision-making\n• Personality trait system (Risk, Greed, Honesty)"
       },
       {
-        "title": "📚 Documentation:",
-        "content": "• MERCHANT_EXPANSION_GUIDE.md - Add your own merchants\n• CHANGES.md - Complete changelog\n• README.md - Full documentation"
-      },
-      {
         "title": "🎭 Merchants:",
-        "content": "• Alice - The Honest Baker\n• Bob - The Bold Trader\n• Cedric - The Greedy Blacksmith\n• Silas Voss - The Information Broker"
+        "content": "• Alice - The Honest Baker\n• Bob - The Bold Trader\n• Cedric - The Greedy Blacksmith\n• Silas Voss - The Information Broker... and more"
       },
       {
         "title": "⚖️  Special Thanks:",
         "content": "To all the merchants who \"donated\" to the Sheriff's fund"
       }
     ],
-    "version": "Version 2.0 - Enhanced Edition",
+    "version": "Version 3.0 - Enhanced Edition",
     "footer": "Press Enter to return to menu..."
   },
   

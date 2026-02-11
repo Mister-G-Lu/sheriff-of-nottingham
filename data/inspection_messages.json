@@ -1,0 +1,54 @@
+{
+  "inspection_header": {
+    "separator": "============================================================",
+    "title": "🔍 INSPECTION RESULTS - {merchant_name}'s Bag"
+  },
+  "declaration": {
+    "label": "📋 DECLARED: {count}x {good_id}"
+  },
+  "bag_contents": {
+    "label": "🎒 ACTUAL BAG CONTENTS:",
+    "item_format": "   {index}. {good_id} (value: {value}g){contraband_marker}",
+    "contraband_marker": " ⚠️ CONTRABAND"
+  },
+  "verdicts": {
+    "bluff_succeeded": {
+      "title": "🎭 {merchant_name}'s BLUFF SUCCEEDED!",
+      "lines": [
+        "   Despite the discrepancy, you didn't notice anything suspicious.",
+        "   All goods pass through undetected."
+      ]
+    },
+    "honest": {
+      "title": "✅ VERDICT: HONEST - Declaration matches contents!",
+      "message": "   All {count} goods pass through."
+    },
+    "lying": {
+      "title": "❌ VERDICT: LYING - Declaration does NOT match contents!"
+    }
+  },
+  "goods_status": {
+    "allowed_through": {
+      "header": "✓ ALLOWED THROUGH ({count} items - truthfully declared):",
+      "item_format": "   • {good_id} (value: {value}g)"
+    },
+    "confiscated": {
+      "header": "⛔ CONFISCATED ({count} items - undeclared):",
+      "item_format": "   • {good_id} (value: {value}g){contraband_marker}",
+      "contraband_marker_legal": " [LEGAL]",
+      "contraband_marker_illegal": " [CONTRABAND]"
+    }
+  },
+  "financial": {
+    "penalty": "💸 PENALTY: {penalty}g (50% of {total_value}g confiscated value)",
+    "merchant_remaining": "   [{merchant_name}] Gold remaining: {gold}g",
+    "merchant_sold": "💰 [{merchant_name}] Sold goods for {value}g. Total: {total}g",
+    "merchant_sold_all": "💰 [{merchant_name}] Sold all goods for {value}g. Total: {total}g"
+  },
+  "sheriff_status": {
+    "bribe_accepted": "[Sheriff] Gold: +{amount}  Reputation: {reputation} (-1 for accepting bribe)"
+  },
+  "tells": {
+    "notice_format": "You notice: {tell}."
+  }
+}

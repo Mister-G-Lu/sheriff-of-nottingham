@@ -3,12 +3,12 @@ Game Rules and Constants
 Defines the core Sheriff of Nottingham game rules
 """
 
-# Starting resources
-STARTING_GOLD = 50
-BAG_SIZE_LIMIT = 6  # Maximum items a merchant can carry in their bag
-
-# Penalty rules
-CONFISCATION_PENALTY_RATE = 0.5  # Merchants pay 50% of confiscated goods' value
+from core.constants import (
+    STARTING_GOLD,
+    STARTING_REPUTATION,
+    BAG_SIZE_LIMIT,
+    CONFISCATION_PENALTY_RATE
+)
 
 # Game flow
 """

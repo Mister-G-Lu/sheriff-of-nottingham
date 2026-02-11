@@ -1,0 +1,13 @@
+{
+  "id": "honest-abe",
+  "name": "Honest Abe",
+  "intro": "A man of principle who has never told a lie in his life.\n\nAbe is so honest it's almost comical. He once returned a dropped coin to a thief who had just robbed him. His reputation for honesty is so strong that even the sheriff feels guilty inspecting his goods.",
+  "tells_honest": ["unwavering gaze", "speaks with absolute confidence", "stands perfectly still"],
+  "tells_lying": ["this never happens", "impossible to detect", "he doesn't lie"],
+  "bluff_skill": 0,
+  "risk_tolerance": 0,
+  "greed": 0,
+  "honesty_bias": 10,
+  "portrait_file": "baker.png",
+  "appearance": "A middle-aged man with an earnest face, wearing simple but well-maintained clothes. He carries a small sack of goods and meets everyone's eyes directly."
+}
