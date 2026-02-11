@@ -1,0 +1,13 @@
+{
+  "id": "BenedictTrader",
+  "name": "Benedict the Trader",
+  "intro": "Charming and loud, always spinning stories and jokes to keep people off-balance.\n\nA traveling spice trader who has seen half the kingdom and been chased out of the other half. He insists he is reformed, but his stories change every time he tells them.",
+  "tells_honest": ["leans casually on his cart", "he laughs easily", "makes eye contact while talking"],
+  "tells_lying": ["over-smiles and shows too many teeth", "talks too fast and changes subjects", "keeps one hand protectively on his satchel"],
+  "bluff_skill": 7,
+  "risk_tolerance": 7,
+  "greed": 6,
+  "honesty_bias": 3,
+  "portrait_file": "trader.png",
+  "appearance": "Middle-aged man with a trimmed black beard, a colorful patchwork cloak, and rings on several fingers. Small cloth pouches of spices hang from his belt, and a battered wooden cart piled with sacks stands behind him in a busy medieval market street."
+}

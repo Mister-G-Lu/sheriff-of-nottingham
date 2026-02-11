@@ -1,0 +1,13 @@
+{
+  "id": "fiona",
+  "name": "Fiona the Seamstress",
+  "intro": "Calculating and composed, carefully chooses her words. Professional demeanor with a hint of cunning.\n\nA skilled seamstress who trades in fine fabrics and exotic silks. She's shrewd in business and knows how to read people. Her calm exterior rarely cracks, making her difficult to read. She smuggles when the profit is worth the risk.",
+  "tells_honest": ["maintains steady posture", "speaks in measured tones", "fingers rest calmly on her fabric samples"],
+  "tells_lying": ["adjusts her collar", "pauses slightly before answering", "her left eye twitches almost imperceptibly"],
+  "bluff_skill": 6,
+  "risk_tolerance": 6,
+  "greed": 7,
+  "honesty_bias": 4,
+  "portrait_file": "seamstress.png",
+  "appearance": "Elegant woman in her thirties with sharp features and keen eyes. She wears a well-tailored dress with intricate embroidery and carries herself with quiet confidence. A measuring tape hangs around her neck."
+}

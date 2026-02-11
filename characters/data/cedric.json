@@ -1,0 +1,13 @@
+{
+  "id": "cedric",
+  "name": "Cedric",
+  "intro": "Blunt, gruff, and proud of honest work, but tempted by the coin that smuggling can bring.\n\nA seasoned blacksmith from the city forge who brings tools, nails, and horseshoes through the gate. Lately, rumors say he has been moving more than just iron.",
+  "tells_honest": ["short, direct answers", "arms crossed but relaxed", "meets your gaze without flinching"],
+  "tells_lying": ["avoids the question with a grunt", "sweat beads along his temples", "shifts his weight and looks past you"],
+  "bluff_skill": 5,
+  "risk_tolerance": 5,
+  "greed": 7,
+  "honesty_bias": 6,
+  "portrait_file": "blacksmith.png",
+  "appearance": "Broad-shouldered man in a soot-stained tunic and leather apron, with scarred forearms and short dark hair. He stands before a wooden cart stacked with tools and iron bars, the faint glow of a distant forge lighting the stone walls of Nottingham behind him."
+}

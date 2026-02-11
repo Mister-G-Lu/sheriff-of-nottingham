@@ -1,0 +1,14 @@
+{
+  "id": "info-broker",
+  "name": "Silas Voss",
+  "role": "broker",
+  "intro": "Calculating and calm; always three steps ahead.\n\nAn information broker who trades in patterns and whispers. He analyzes every merchant who passes through the gate, learning from their successes and failures. His ledger contains more than just numbers — it holds the secrets of Nottingham's trade routes.",
+  "tells_honest": ["his steady gaze", "his measured tone", "hand caressing his chin"],
+  "tells_lying": ["a knowing smile", "a light chuckle", "his fingertips touching thoughtfully"],
+  "bluff_skill": 9,
+  "risk_tolerance": 7,
+  "greed": 9,
+  "honesty_bias": 1,
+  "portrait_file": "broker.png",
+  "appearance": "A shadowy figure with a ledger and keen eyes, always taking notes."
+}

@@ -1,0 +1,13 @@
+{
+  "id": "diana",
+  "name": "Diana the Herbalist",
+  "intro": "Gentle and timid, easily flustered when questioned. Wears her heart on her sleeve.\n\nA young herbalist who grows medicinal plants in her garden. She's terrified of authority and breaks into a sweat at the mere sight of the Sheriff. Her nervousness makes her an open book.",
+  "tells_honest": ["relaxed shoulders", "soft smile", "hums a little tune"],
+  "tells_lying": ["trembles visibly", "voice cracks and stutters", "wrings her hands constantly", "won't stop apologizing"],
+  "bluff_skill": 1,
+  "risk_tolerance": 1,
+  "greed": 2,
+  "honesty_bias": 9,
+  "portrait_file": "herbalist.png",
+  "appearance": "Young woman in her early twenties with dirt-stained fingers and a basket of herbs. She wears a simple green dress and has flowers woven into her braided hair. Her eyes dart nervously at every sound."
+}

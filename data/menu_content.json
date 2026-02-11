@@ -1,0 +1,71 @@
+{
+  "title_ascii_art": "╔═══════════════════════════════════════════════════════════════════════════╗\n║                                                                           ║\n║          _____ _               _  __  __                                  ║\n║         / ____| |             (_)/ _|/ _|                                 ║\n║        | (___ | |__   ___ _ __ _| |_| |_                                  ║\n║         \\___ \\| '_ \\ / _ \\ '__| |  _|  _|                                 ║\n║         ____) | | | |  __/ |  | | | | |                                   ║\n║        |_____/|_| |_|\\___|_|  |_|_| |_|                                   ║\n║                                                                           ║\n║               ___   __                                                    ║\n║              / _ \\ / _|                                                   ║\n║             | | | | |_                                                    ║\n║             | | | |  _|                                                   ║\n║             | |_| | |                                                     ║\n║              \\___/|_|                                                     ║\n║                                                                           ║\n║          _   _       _   _   _             _                              ║\n║         | \\ | |     | | | | (_)           | |                             ║\n║         |  \\| | ___ | |_| |_ _ _ __   __ _| |__   __ _ _ __ ___           ║\n║         | . ` |/ _ \\| __| __| | '_ \\ / _` | '_ \\ / _` | '_ ` _ \\          ║\n║         | |\\  | (_) | |_| |_| | | | | (_| | | | | (_| | | | | | |         ║\n║         |_| \\_|\\___/ \\__|\\__|_|_| |_|\\__, |_| |_|\\__,_|_| |_| |_|         ║\n║                                       __/ |                               ║\n║                                      |___/                                ║\n║                                                                           ║\n╚═══════════════════════════════════════════════════════════════════════════╝",
+  
+  "title_pygame": "SHERIFF OF NOTTINGHAM",
+  
+  "how_to_play": {
+    "header": "╔═══════════════════════════════════════════════════════════════════════════╗\n║                            HOW TO PLAY                                    ║\n╚═══════════════════════════════════════════════════════════════════════════╝",
+    "sections": [
+      {
+        "title": "🎯 YOUR ROLE:",
+        "content": "You are the Sheriff of Nottingham, inspecting merchants at the city gate.\nYour job is to catch smugglers while maintaining your reputation."
+      },
+      {
+        "title": "📦 GAMEPLAY:",
+        "content": "1. Merchants arrive and declare their goods\n2. Observe their behavior for \"tells\" (signs of honesty or lying)\n3. Some nervous merchants may offer bribes proactively\n4. Decide your action:\n   • Accept bribe (if offered) - Take gold, let them pass\n   • Threaten to inspect - Enter negotiation\n   • Inspect immediately - Check their bag\n   • Let them pass - Trust them"
+      },
+      {
+        "title": "💰 NEGOTIATION:",
+        "content": "• Merchants may offer bribes when threatened\n• You can accept, reject, or demand more gold\n• Multi-round haggling is possible\n• Merchants may give up if demands are too high"
+      },
+      {
+        "title": "⚖️  REPUTATION:",
+        "content": "• Catching smugglers: +1 reputation, +1 experience\n• Inspecting honest merchants: -1 reputation\n• Trusting honest merchants: +1 reputation\n• Missing smugglers: -2 reputation\n• Accepting bribes: -1 reputation (but you get gold!)"
+      },
+      {
+        "title": "🎭 MERCHANT PERSONALITIES:",
+        "content": "• Cautious: Offer generous bribes, nervous behavior\n• Bold: Risk-takers, may refuse to bribe\n• Greedy: Offer minimal bribes, give up easily\n• Each merchant has unique tells and traits"
+      },
+      {
+        "title": "💡 TIPS:",
+        "content": "• Watch for tells - they hint at honesty or deception\n• Cautious merchants bribe even with legal goods\n• Bold merchants sometimes refuse to bribe entirely\n• Bribes are based on goods value and personality\n• Build reputation to become more intimidating"
+      }
+    ],
+    "footer": "Press Enter to return to menu..."
+  },
+  
+  "credits": {
+    "header": "╔═══════════════════════════════════════════════════════════════════════════╗\n║                              CREDITS                                      ║\n╚═══════════════════════════════════════════════════════════════════════════╝",
+    "title": "SHERIFF OF NOTTINGHAM\nInteractive Inspector Game",
+    "sections": [
+      {
+        "title": "🎮 Game Design:",
+        "content": "Inspired by the board game \"Sheriff of Nottingham\""
+      },
+      {
+        "title": "💻 Programming:",
+        "content": "AI-Driven Merchant Personalities\nDynamic Negotiation System\nPersonality-Based Decision Making"
+      },
+      {
+        "title": "🎨 Features:",
+        "content": "• Threat-based negotiation system\n• Proactive bribe offers\n• Multi-round haggling\n• AI merchant decision-making\n• Personality trait system (Risk, Greed, Honesty)"
+      },
+      {
+        "title": "📚 Documentation:",
+        "content": "• MERCHANT_EXPANSION_GUIDE.md - Add your own merchants\n• CHANGES.md - Complete changelog\n• README.md - Full documentation"
+      },
+      {
+        "title": "🎭 Merchants:",
+        "content": "• Alice - The Honest Baker\n• Bob - The Bold Trader\n• Cedric - The Greedy Blacksmith\n• Silas Voss - The Information Broker"
+      },
+      {
+        "title": "⚖️  Special Thanks:",
+        "content": "To all the merchants who \"donated\" to the Sheriff's fund"
+      }
+    ],
+    "version": "Version 2.0 - Enhanced Edition",
+    "footer": "Press Enter to return to menu..."
+  },
+  
+  "exit_message": "\n👋 Thanks for playing! May your coffers be full and your reputation intact.\n"
+}

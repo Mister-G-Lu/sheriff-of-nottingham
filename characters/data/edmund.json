@@ -1,0 +1,13 @@
+{
+  "id": "edmund",
+  "name": "Edmund the Fishmonger",
+  "intro": "Jovial and talkative, uses humor to deflect. Friendly but occasionally too eager to please.\n\nA portly fisherman who smells of the sea and always has a joke ready. He's honest most of the time but occasionally smuggles 'special catches' for wealthy clients. His friendliness can be disarming, but he talks too much when nervous.",
+  "tells_honest": ["has a hearty belly laugh", "slaps his knee", "makes eye contact easily"],
+  "tells_lying": ["laughs too loudly", "tells rambling stories", "keeps touching his fish cart nervously"],
+  "bluff_skill": 4,
+  "risk_tolerance": 4,
+  "greed": 5,
+  "honesty_bias": 6,
+  "portrait_file": "fishmonger.png",
+  "appearance": "Round-bellied man with a bushy red beard and weathered skin. He wears a stained apron and rubber boots, with a wide-brimmed hat to shield from the sun. His cart reeks of fish and seaweed."
+}

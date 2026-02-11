@@ -1,0 +1,69 @@
+{
+  "legendary_sheriff": {
+    "title": "🏆 THE LEGENDARY SHERIFF",
+    "rating": "★★★★★ LEGENDARY",
+    "paragraphs": [
+      "You have achieved the impossible - maintaining both honor AND wealth!",
+      "The Prince himself marvels at your skill. You caught smugglers with precision, yet somehow accumulated a fortune. Some whisper you know secrets... but none can prove corruption. You are a legend.",
+      "The people trust you. The Prince rewards you. The kingdom prospers. This is the stuff of ballads and tavern tales!"
+    ]
+  },
+  "honorable_sheriff": {
+    "title": "⚔️ THE HONORABLE SHERIFF",
+    "rating": "★★★★☆ HONORABLE",
+    "paragraphs": [
+      "You never once accepted a bribe. Your integrity is unquestionable.",
+      "The Prince commends your unwavering vigilance and moral fortitude. Tales of your keen eye and honest heart spread throughout the kingdom.",
+      "You may not be rich, but you sleep soundly at night. The people of Nottingham know they can trust you."
+    ]
+  },
+  "corrupt_baron": {
+    "title": "💰 THE CORRUPT BARON",
+    "rating": "★★★☆☆ CORRUPT",
+    "paragraphs": [
+      "Your pockets are heavy with gold from 'overlooked' contraband.",
+      "You've mastered the art of selective enforcement - just enough vigilance to keep your position, just enough corruption to get rich.",
+      "The Prince suspects nothing. The merchants know who to pay. You've built a small fortune on bribes and blind eyes. Morally questionable? Perhaps. Profitable? Absolutely."
+    ]
+  },
+  "excellent": {
+    "title": "Excellent Performance",
+    "rating": "★★★★☆ EXCELLENT",
+    "paragraphs": [
+      "You've proven yourself a capable and trustworthy Sheriff.",
+      "The people of Nottingham sleep safer knowing you guard the gate."
+    ]
+  },
+  "good": {
+    "title": "Good Performance",
+    "rating": "★★★☆☆ GOOD",
+    "paragraphs": [
+      "You maintained order at the gate, though some smugglers slipped through.",
+      "The Prince is satisfied... for now."
+    ]
+  },
+  "mediocre": {
+    "title": "Mediocre Performance",
+    "rating": "★★☆☆☆ MEDIOCRE",
+    "paragraphs": [
+      "Your performance was adequate, but barely.",
+      "The Prince expects better from his Sheriffs."
+    ]
+  },
+  "poor": {
+    "title": "Poor Performance",
+    "rating": "★☆☆☆☆ POOR",
+    "paragraphs": [
+      "Whispers of incompetence—or worse, corruption—follow you.",
+      "One more shift like this and you'll be looking for new work."
+    ]
+  },
+  "fired": {
+    "title": "💀 GAME OVER - FIRED",
+    "rating": "☆☆☆☆☆ FIRED",
+    "paragraphs": [
+      "Your reputation has fallen to zero. The Prince has no use for you.",
+      "Pack your things. You're finished as Sheriff of Nottingham."
+    ]
+  }
+}
