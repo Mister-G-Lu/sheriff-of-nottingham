@@ -204,8 +204,9 @@ pytest tests/unit/ai_strategy/ # AI strategy tests
    - Adjusts: truth/lie decision, contraband count, contraband value
    - Result: Adaptive difficulty that responds to player behavior
 
-# Rejected ideas
+# Rejected ideas (refuse to do)
 
+Dynamic Portrait (more effort than it's worth - hard to make consistent portraits)
 Dynamic market price - might be too complex
 Multiplayer - servers are hard to manage
 

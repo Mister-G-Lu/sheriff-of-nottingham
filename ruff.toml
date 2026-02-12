@@ -1,0 +1,45 @@
+# Ruff configuration for Sheriff of Nottingham
+# Modern Python linter with auto-fix capabilities
+
+[lint]
+# Enable specific rule sets
+select = [
+    "F",     # Pyflakes (unused imports, undefined names)
+    "E",     # pycodestyle errors
+    "W",     # pycodestyle warnings
+    "I",     # isort (import sorting)
+    "N",     # pep8-naming
+    "UP",    # pyupgrade (modern Python syntax)
+    "B",     # flake8-bugbear (common bugs)
+    "C4",    # flake8-comprehensions
+    "SIM",   # flake8-simplify
+]
+
+# Ignore specific rules
+ignore = [
+    "E501",  # Line too long (handled by formatter)
+    "B008",  # Do not perform function calls in argument defaults
+    "SIM102", # Use single if statement (optional simplification)
+    "SIM105", # Use contextlib.suppress (optional simplification)
+    "SIM117", # Combine with statements (optional simplification)
+]
+
+# Exclude directories
+exclude = [
+    ".git",
+    "__pycache__",
+    ".pytest_cache",
+    "htmlcov",
+    "*.egg-info",
+    "build",
+    "dist",
+    "venv",
+    ".venv",
+]
+
+[lint.per-file-ignores]
+# (No exceptions needed - all imports are properly used!)
+
+[lint.isort]
+# Configure import sorting
+known-first-party = ["core", "ui", "ai_strategy"]
