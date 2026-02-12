@@ -3,12 +3,7 @@ Game Rules and Constants
 Defines the core Sheriff of Nottingham game rules
 """
 
-from core.constants import (
-    STARTING_GOLD,
-    STARTING_REPUTATION,
-    BAG_SIZE_LIMIT,
-    CONFISCATION_PENALTY_RATE
-)
+from core.constants import CONFISCATION_PENALTY_RATE
 
 # Game flow
 """
@@ -16,7 +11,7 @@ Sheriff of Nottingham Rules:
 
 1. MERCHANT TURN:
    - Draw cards from market until you have 6 cards total
-   - Load 1-6 items into your bag
+   - Load 1-5 items into your bag
    - Declare what's in your bag (must declare ONE type of good and count)
 
 2. DECLARATION RULES:
@@ -25,18 +20,18 @@ Sheriff of Nottingham Rules:
    - You can lie about what's in the bag
 
 3. INSPECTION OUTCOMES:
-   
+
    A. If you told the TRUTH:
       - All declared goods pass through (even if inspected)
       - You keep your goods and sell them
       - Sheriff loses reputation for wrongly inspecting honest merchant
-   
+
    B. If you LIED and get CAUGHT:
       - ALL undeclared goods are confiscated (legal AND contraband)
       - You must pay the Sheriff HALF the value of confiscated goods
       - Sheriff gains reputation for catching a liar
       - Only truthfully declared goods pass through
-   
+
    C. If you LIED and DON'T get caught:
       - All goods pass through
       - You profit from the lie
@@ -59,10 +54,10 @@ Sheriff of Nottingham Rules:
 def calculate_confiscation_penalty(goods: list) -> int:
     """
     Calculate penalty for confiscated goods.
-    
+
     Args:
         goods: List of Good objects that were confiscated
-    
+
     Returns:
         int: Amount merchant must pay (50% of goods value)
     """
@@ -70,23 +65,25 @@ def calculate_confiscation_penalty(goods: list) -> int:
     return int(total_value * CONFISCATION_PENALTY_RATE)
 
 
-def separate_declared_and_undeclared(actual_goods: list, declaration: dict) -> tuple[list, list]:
+def separate_declared_and_undeclared(
+    actual_goods: list, declaration: dict
+) -> tuple[list, list]:
     """
     Separate goods into declared (truthful) and undeclared (lies/contraband).
-    
+
     Args:
         actual_goods: List of Good objects in the bag
         declaration: Dict with 'good_id' and 'count'
-    
+
     Returns:
         tuple: (declared_goods, undeclared_goods)
     """
-    declared_id = declaration['good_id']
-    declared_count = declaration['count']
-    
+    declared_id = declaration["good_id"]
+    declared_count = declaration["count"]
+
     declared_goods = []
     undeclared_goods = []
-    
+
     # Count how many of the declared good are actually in the bag
     declared_found = 0
     for good in actual_goods:
@@ -95,5 +92,5 @@ def separate_declared_and_undeclared(actual_goods: list, declaration: dict) -> t
             declared_found += 1
         else:
             undeclared_goods.append(good)
-    
+
     return declared_goods, undeclared_goods

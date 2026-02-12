@@ -12,43 +12,76 @@ For backward compatibility, commonly used classes are re-exported below.
 # Note: run_game is not imported here to avoid circular imports with ui.narration
 # Import it directly from core.game.game_manager when needed
 from core.constants import (
-    HAND_SIZE_LIMIT, BAG_SIZE_LIMIT, STARTING_GOLD, STARTING_REPUTATION,
-    STARTING_PERCEPTION, STARTING_AUTHORITY, STARTING_EXPERIENCE
+    BAG_SIZE_LIMIT,
+    HAND_SIZE_LIMIT,
+    STARTING_AUTHORITY,
+    STARTING_EXPERIENCE,
+    STARTING_GOLD,
+    STARTING_PERCEPTION,
+    STARTING_REPUTATION,
 )
-from core.game.rounds import Declaration, resolve_inspection
 from core.game.end_game import show_end_game_summary
-
-from core.players.merchants import Merchant, InformationBroker
-from core.players.merchant_loader import load_merchants
-from core.players.sheriff import Sheriff
-from core.players.sheriff_analysis import calculate_catch_rate, analyze_sheriff_detailed
-
-from core.mechanics.goods import Good, GOOD_BY_ID, ALL_LEGAL, ALL_CONTRABAND
+from core.game.rounds import Declaration, resolve_inspection
+from core.mechanics.goods import ALL_CONTRABAND, ALL_LEGAL, GOOD_BY_ID, Good
 from core.mechanics.inspection import handle_inspection, handle_pass_without_inspection
 from core.mechanics.negotiation import (
-    initiate_threat, merchant_respond_to_threat, sheriff_respond_to_bribe,
-    merchant_respond_to_counter, resolve_negotiation, NegotiationOutcome, NegotiationState
+    NegotiationOutcome,
+    NegotiationState,
+    initiate_threat,
+    merchant_respond_to_counter,
+    merchant_respond_to_threat,
+    resolve_negotiation,
+    sheriff_respond_to_bribe,
 )
-# black_market removed - feature not being implemented
-
-from core.systems.logger import log_error, log_warning, log_info, log_debug
+from core.players.merchant_loader import load_merchants
+from core.players.merchants import Merchant
+from core.players.sheriff import Sheriff
+from core.players.sheriff_analysis import analyze_sheriff_detailed, calculate_catch_rate
+from core.players.silas_voss import SilasVoss as InformationBroker
 from core.systems.game_stats import GameStats
+
+# black_market removed - feature not being implemented
+from core.systems.logger import log_debug, log_error, log_info, log_warning
 from core.systems.reputation import update_sheriff_reputation
 
 __all__ = [
     # Game management
-    'HAND_SIZE_LIMIT', 'BAG_SIZE_LIMIT', 'STARTING_GOLD', 'STARTING_REPUTATION',
-    'STARTING_PERCEPTION', 'STARTING_AUTHORITY', 'STARTING_EXPERIENCE',
-    'Declaration', 'resolve_inspection', 'show_end_game_summary',
+    "HAND_SIZE_LIMIT",
+    "BAG_SIZE_LIMIT",
+    "STARTING_GOLD",
+    "STARTING_REPUTATION",
+    "STARTING_PERCEPTION",
+    "STARTING_AUTHORITY",
+    "STARTING_EXPERIENCE",
+    "Declaration",
+    "resolve_inspection",
+    "show_end_game_summary",
     # Players
-    'Merchant', 'InformationBroker', 'load_merchants', 'Sheriff',
-    'calculate_catch_rate', 'analyze_sheriff_detailed',
+    "Merchant",
+    "InformationBroker",
+    "load_merchants",
+    "Sheriff",
+    "calculate_catch_rate",
+    "analyze_sheriff_detailed",
     # Mechanics
-    'Good', 'GOOD_BY_ID', 'ALL_LEGAL', 'ALL_CONTRABAND',
-    'handle_inspection', 'handle_pass_without_inspection',
-    'initiate_threat', 'merchant_respond_to_threat', 'sheriff_respond_to_bribe',
-    'merchant_respond_to_counter', 'resolve_negotiation', 'NegotiationOutcome', 'NegotiationState',
+    "Good",
+    "GOOD_BY_ID",
+    "ALL_LEGAL",
+    "ALL_CONTRABAND",
+    "handle_inspection",
+    "handle_pass_without_inspection",
+    "initiate_threat",
+    "merchant_respond_to_threat",
+    "sheriff_respond_to_bribe",
+    "merchant_respond_to_counter",
+    "resolve_negotiation",
+    "NegotiationOutcome",
+    "NegotiationState",
     # Systems
-    'log_error', 'log_warning', 'log_info', 'log_debug',
-    'GameStats', 'update_sheriff_reputation',
+    "log_error",
+    "log_warning",
+    "log_info",
+    "log_debug",
+    "GameStats",
+    "update_sheriff_reputation",
 ]

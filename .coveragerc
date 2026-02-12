@@ -1,0 +1,49 @@
+[run]
+source = core,ui
+omit = 
+    */tests/*
+    */test_*.py
+    */__pycache__/*
+    # Pure display modules - only format and print, no business logic
+    core/game/inspection_display.py
+    # Tutorial - interactive UI feature, not core game logic
+    core/game/tutorial.py
+    # Pygame wrapper modules - infrastructure code, not game logic
+    # These are thin wrappers around pygame library for rendering/input
+    ui/pygame_*.py
+    ui/stats_bar.py
+    ui/price_menu.py
+
+[report]
+# Exclude lines from coverage
+exclude_lines =
+    # Standard exclusions
+    pragma: no cover
+    def __repr__
+    raise AssertionError
+    raise NotImplementedError
+    if __name__ == .__main__.:
+    if TYPE_CHECKING:
+    @abstractmethod
+    
+    # Pure display/UI functions - these only format and print, no business logic
+    # Exclude print statements in display-only modules
+    ^\s*print\(
+    
+# Skip empty files
+skip_empty = True
+
+# Skip covered files in report
+skip_covered = False
+
+# Precision for coverage percentage
+precision = 0
+
+[html]
+directory = htmlcov
+title = Sheriff of Nottingham - Test Coverage Report
+
+[coverage:paths]
+source =
+    core/
+    ui/

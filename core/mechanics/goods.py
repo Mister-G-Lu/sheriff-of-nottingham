@@ -1,8 +1,19 @@
 """Good types: legal goods and contraband."""
 
-from enum import Enum
 from dataclasses import dataclass
+from enum import Enum
 from typing import Optional
+
+from core.constants import (
+    APPLE_VALUE,
+    BREAD_VALUE,
+    CHEESE_VALUE,
+    CHICKEN_VALUE,
+    CROSSBOW_VALUE,
+    MEAD_VALUE,
+    PEPPER_VALUE,
+    SILK_VALUE,
+)
 
 
 class GoodKind(str, Enum):
@@ -13,6 +24,7 @@ class GoodKind(str, Enum):
 @dataclass
 class Good:
     """A single good type (e.g. apple, silk)."""
+
     id: str
     name: str
     kind: GoodKind
@@ -26,16 +38,16 @@ class Good:
 
 
 # Legal goods (green)
-APPLE = Good("apple", "Apple", GoodKind.LEGAL, 2)
-CHEESE = Good("cheese", "Cheese", GoodKind.LEGAL, 3)
-BREAD = Good("bread", "Bread", GoodKind.LEGAL, 3)
-CHICKEN = Good("chicken", "Chicken", GoodKind.LEGAL, 4)
+APPLE = Good("apple", "Apple", GoodKind.LEGAL, APPLE_VALUE)
+CHEESE = Good("cheese", "Cheese", GoodKind.LEGAL, CHEESE_VALUE)
+BREAD = Good("bread", "Bread", GoodKind.LEGAL, BREAD_VALUE)
+CHICKEN = Good("chicken", "Chicken", GoodKind.LEGAL, CHICKEN_VALUE)
 
 # Contraband (red)
-SILK = Good("silk", "Silk", GoodKind.CONTRABAND, 6)
-PEPPER = Good("pepper", "Pepper", GoodKind.CONTRABAND, 8)
-MEAD = Good("mead", "Mead", GoodKind.CONTRABAND, 10)
-CROSSBOW = Good("crossbow", "Crossbow", GoodKind.CONTRABAND, 15)
+SILK = Good("silk", "Silk", GoodKind.CONTRABAND, SILK_VALUE)
+PEPPER = Good("pepper", "Pepper", GoodKind.CONTRABAND, PEPPER_VALUE)
+MEAD = Good("mead", "Mead", GoodKind.CONTRABAND, MEAD_VALUE)
+CROSSBOW = Good("crossbow", "Crossbow", GoodKind.CONTRABAND, CROSSBOW_VALUE)
 
 ALL_LEGAL: tuple[Good, ...] = (APPLE, CHEESE, BREAD, CHICKEN)
 ALL_CONTRABAND: tuple[Good, ...] = (SILK, PEPPER, MEAD, CROSSBOW)

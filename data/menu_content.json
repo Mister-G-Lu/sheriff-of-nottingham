@@ -1,39 +1,56 @@
 {
   "title_ascii_art": "╔═══════════════════════════════════════════════════════════════════════════╗\n║                                                                           ║\n║          _____ _               _  __  __                                  ║\n║         / ____| |             (_)/ _|/ _|                                 ║\n║        | (___ | |__   ___ _ __ _| |_| |_                                  ║\n║         \\___ \\| '_ \\ / _ \\ '__| |  _|  _|                                 ║\n║         ____) | | | |  __/ |  | | | | |                                   ║\n║        |_____/|_| |_|\\___|_|  |_|_| |_|                                   ║\n║                                                                           ║\n║               ___   __                                                    ║\n║              / _ \\ / _|                                                   ║\n║             | | | | |_                                                    ║\n║             | | | |  _|                                                   ║\n║             | |_| | |                                                     ║\n║              \\___/|_|                                                     ║\n║                                                                           ║\n║          _   _       _   _   _             _                              ║\n║         | \\ | |     | | | | (_)           | |                             ║\n║         |  \\| | ___ | |_| |_ _ _ __   __ _| |__   __ _ _ __ ___           ║\n║         | . ` |/ _ \\| __| __| | '_ \\ / _` | '_ \\ / _` | '_ ` _ \\          ║\n║         | |\\  | (_) | |_| |_| | | | | (_| | | | | (_| | | | | | |         ║\n║         |_| \\_|\\___/ \\__|\\__|_|_| |_|\\__, |_| |_|\\__,_|_| |_| |_|         ║\n║                                       __/ |                               ║\n║                                      |___/                                ║\n║                                                                           ║\n╚═══════════════════════════════════════════════════════════════════════════╝",
-  
   "title_pygame": "SHERIFF OF NOTTINGHAM",
-  
   "how_to_play": {
     "header": "╔═══════════════════════════════════════════════════════════════════════════╗\n║                            HOW TO PLAY                                    ║\n╚═══════════════════════════════════════════════════════════════════════════╝",
     "sections": [
       {
         "title": "🎯 YOUR ROLE:",
-        "content": "You are the Sheriff of Nottingham, inspecting merchants at the city gate.\nYour job is to catch smugglers while maintaining your reputation."
+        "content": "You are the Sheriff of Nottingham, inspecting merchants at the city gate.\nYou start with 50g and must catch smugglers while maintaining reputation."
       },
       {
-        "title": "📦 GAMEPLAY:",
-        "content": "1. Merchants arrive and declare their goods\n2. Observe their behavior for \"tells\" (signs of honesty or lying)\n3. Some nervous merchants may offer bribes proactively\n4. Decide your action:\n   • Accept bribe (if offered) - Take gold, let them pass\n   • Threaten to inspect - Enter negotiation\n   • Inspect immediately - Check their bag\n   • Let them pass - Trust them"
+        "title": "📦 MERCHANT TURN:",
+        "content": "1. Merchants draw 7 cards from the deck\n2. They choose up to 5 items to put in their bag\n3. They declare ONE type of LEGAL good and the count\n4. They may offer a proactive bribe\n5. You decide: Accept bribe, Threaten, Inspect, or Let pass"
       },
       {
-        "title": "💰 NEGOTIATION:",
-        "content": "• Merchants may offer bribes when threatened\n• You can accept, reject, or demand more gold\n• Multi-round haggling is possible\n• Merchants may give up if demands are too high"
+        "title": "💰 GOODS & VALUES:",
+        "content": "LEGAL GOODS (Safe to declare):\n  • Apple: 2g\n  • Cheese: 3g\n  • Bread: 3g\n  • Chicken: 4g\n\nCONTRABAND (Illegal, but valuable!):\n  • Silk: 8g\n  • Pepper: 8g\n  • Mead: 10g\n  • Crossbow: 15g"
       },
       {
-        "title": "⚖️  REPUTATION:",
-        "content": "• Catching smugglers: +1 reputation, +1 experience\n• Inspecting honest merchants: -1 reputation\n• Trusting honest merchants: +1 reputation\n• Missing smugglers: -2 reputation\n• Accepting bribes: -1 reputation (but you get gold!)"
+        "title": "🎁 CONTRABAND SET BONUSES:",
+        "content": "CONTRABAND SET BONUSES (Same type):\n  • 2x Silk: 1.5x multiplier\n    Base: 16g → Bonus: 24g (+8g!)\n  • 3x Mead: 2.0x multiplier\n    Base: 30g → Bonus: 60g (+30g!)\n  • 4x Pepper: 3.0x multiplier\n    Base: 32g → Bonus: 96g (+64g!)\n  • 5x Crossbow: 5.0x multiplier\n    Base: 75g → Bonus: 375g (+300g!)\n\nSpecializing in one contraband type = HUGE profits!\nExample: 5x Crossbow = 375g (vs 75g base) - 5x multiplier!"
+      },
+      {
+        "title": "🎭 INSPECTION OUTCOMES:",
+        "content": "IF MERCHANT WAS HONEST:\n  • All goods pass through\n  • You lose 1 reputation (wrongly accused)\n  • You pay merchant the goods value (penalty)\n\nIF MERCHANT LIED (caught):\n  • Undeclared goods confiscated\n  • Merchant pays 50% penalty on confiscated value\n  • You gain +1 reputation, +1 experience\n  • Truthfully declared goods still pass\n\nIF MERCHANT LIED (not caught):\n  • All goods pass through\n  • You lose 2 reputation (missed smuggler)\n  • Merchant profits from contraband + bonuses"
+      },
+      {
+        "title": "⚖️  LEGAL LIES:",
+        "content": "Merchants can lie about LEGAL goods too!\nExample: Declare '4 Apples' but carry '3 Chicken + 1 Apple'\n  • All legal goods, but wrong type\n  • If caught: Confiscation + 50% penalty\n  • Lower risk than contraband, but still punished"
+      },
+      {
+        "title": "💡 NEGOTIATION:",
+        "content": "When you THREATEN to inspect:\n  • Merchant may offer a bribe\n  • You can: Accept, Reject, or Demand more\n  • Multi-round haggling possible\n  • Merchants give up if demands too high\n  • Accepting bribes: -1 reputation (but +gold!)"
       },
       {
         "title": "🎭 MERCHANT PERSONALITIES:",
-        "content": "• Cautious: Offer generous bribes, nervous behavior\n• Bold: Risk-takers, may refuse to bribe\n• Greedy: Offer minimal bribes, give up easily\n• Each merchant has unique tells and traits"
+        "content": "Each merchant has unique traits:\n  • HONESTY: How often they tell the truth\n  • RISK TOLERANCE: How bold their smuggling\n  • GREED: How much they want profit\n  • BLUFF SKILL: How well they hide lies\n\nWatch for TELLS (behavioral hints):\n  • Honest: Calm, confident, direct\n  • Lying: Nervous, sweating, avoiding eye contact"
       },
       {
-        "title": "💡 TIPS:",
-        "content": "• Watch for tells - they hint at honesty or deception\n• Cautious merchants bribe even with legal goods\n• Bold merchants sometimes refuse to bribe entirely\n• Bribes are based on goods value and personality\n• Build reputation to help win the game"
+        "title": "🎴 MERCHANT STRATEGY:",
+        "content": "Merchants use sophisticated AI:\n  • Draw cards and manage their hand\n  • Redraw unwanted cards strategically\n  • Greedy merchants hunt for contraband sets\n  • Honest merchants seek consistency\n  • Silas Voss adapts to YOUR behavior!\n\nDifferent merchants excel vs different sheriffs."
+      },
+      {
+        "title": "💡 TIPS FOR SUCCESS:",
+        "content": "• Watch for tells - they hint at honesty/deception\n• Cautious merchants bribe even when honest\n• Bold merchants may refuse to bribe entirely\n• High-value declarations = more suspicious\n• Build reputation to win the game\n• Accept bribes for gold, but lose reputation\n• Silas learns YOUR patterns - stay unpredictable!"
+      },
+      {
+        "title": "🏆 WINNING:",
+        "content": "Balance three goals:\n  1. GOLD: Catch smugglers, accept bribes\n  2. REPUTATION: Trust honest, catch liars\n  3. EXPERIENCE: Successful inspections\n\nThe best Sheriff maximizes all three!"
       }
     ],
     "footer": "Press Enter to return to menu..."
   },
-  
   "credits": {
     "header": "╔═══════════════════════════════════════════════════════════════════════════╗\n║                              CREDITS                                      ║\n╚═══════════════════════════════════════════════════════════════════════════╝",
     "title": "SHERIFF OF NOTTINGHAM\nInteractive Inspector Game",
@@ -66,6 +83,5 @@
     "version": "Version 3.0 - Enhanced Edition",
     "footer": "Press Enter to return to menu..."
   },
-  
   "exit_message": "\n👋 Thanks for playing! May your coffers be full and your reputation intact.\n"
 }

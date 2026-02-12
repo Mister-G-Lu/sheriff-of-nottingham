@@ -1,0 +1,13 @@
+{
+  "id": "gambler",
+  "name": "The Gambler",
+  "intro": "A risk-taker who plays the odds, not the sheriff. Usually honest, but when he sees a big opportunity, he goes all-in.\n\nA charismatic gambler who believes in luck and timing. He's honest most of the time, building trust and reputation. But when the cards align perfectly - when he gets multiple of the same contraband - he can't resist the big play. He smuggles boldly with no bribe, betting on his honest reputation to carry him through.",
+  "tells_honest": ["he smiles confidently", "he makes direct eye contact", "his hands are relaxed and open"],
+  "tells_lying": ["he smirks confidently", "he winks at you", "his hands play with the cards in his hand"],
+  "bluff_skill": 9,
+  "risk_tolerance": 9,
+  "greed": 7,
+  "honesty_bias": 6,
+  "portrait_file": "gambler.png",
+  "appearance": "A well-dressed man in his thirties with slicked-back dark hair and a charming smile. He wears a fine vest with playing cards tucked in the pocket and dice hanging from a chain. His eyes sparkle with mischief and confidence."
+}

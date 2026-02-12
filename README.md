@@ -214,7 +214,11 @@ Multiplayer - servers are hard to manage
 - Save/load game state - encryption how? Secret obtained from file metadata?
 - Merchant/Sheriff reputation across sessions
 - "Black Market" who encourages bribery and accepting contraband to restore reputation
+- Campaign/Story mode
+- Achievements
 
+# Main Issues
+
+Long Functions - execute_tutorial_choice() is 100+ lines
+Import Organization - Imports scattered throughout code
 ---
-
-**For detailed merchant expansion guide, see:** `docs/MERCHANT_EXPANSION_GUIDE.md`

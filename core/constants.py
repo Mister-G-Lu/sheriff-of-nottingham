@@ -1,5 +1,9 @@
 """
-Centralized Constants for Sheriff of Nottingham
+Game Logic Constants for Sheriff of Nottingham
+
+This module contains constants for game rules, mechanics, and logic ONLY.
+For UI-related constants, see ui/ui_constants.py
+
 All game constants organized by category for easy reference and modification
 """
 
@@ -11,12 +15,12 @@ All game constants organized by category for easy reference and modification
 STARTING_GOLD = 50
 STARTING_REPUTATION = 5  # Sheriff starts with neutral reputation (scale 0-10)
 STARTING_PERCEPTION = 1  # Sheriff's starting perception stat
-STARTING_AUTHORITY = 1   # Sheriff's starting authority stat
+STARTING_AUTHORITY = 1  # Sheriff's starting authority stat
 STARTING_EXPERIENCE = 0  # Sheriff starts with no experience
 
 # Bag and inventory limits
 HAND_SIZE_LIMIT = 7  # Maximum cards a merchant has available to choose from
-BAG_SIZE_LIMIT = 5   # Maximum items a merchant can carry/smuggle in their bag
+BAG_SIZE_LIMIT = 5  # Maximum items a merchant can carry/smuggle in their bag
 
 # Penalty rules
 CONFISCATION_PENALTY_RATE = 0.5  # Merchants pay 50% of confiscated goods' value
@@ -31,82 +35,18 @@ MAX_STAT = 10
 
 
 # ============================================================================
-# UI - COLORS
+# PROBABILITIES
 # ============================================================================
 
-# Basic colors
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-GRAY = (128, 128, 128)
-DARK_GRAY = (50, 50, 50)
-LIGHT_GRAY = (200, 200, 200)
+# Bribe probability thresholds
+BRIBE_PROB_LOW = 0.2  # 20% base chance for low-risk bribes
+BRIBE_PROB_MODERATE = 0.3  # 30% chance for moderate bribes
+BRIBE_PROB_HIGH = 0.5  # 50% chance for high-risk bribes
+BRIBE_PROB_MAX = 0.7  # 70% maximum bribe probability
 
-# Themed colors
-GREEN = (0, 255, 0)
-DARK_GREEN = (0, 180, 0)
-RED = (255, 0, 0)
-DARK_RED = (180, 0, 0)
-GOLD = (255, 215, 0)
-
-
-# ============================================================================
-# UI - SCREEN DIMENSIONS
-# ============================================================================
-
-SCREEN_WIDTH = 1200
-SCREEN_HEIGHT = 800
-
-
-# ============================================================================
-# UI - LAYOUT - PORTRAITS
-# ============================================================================
-
-# Gameplay portraits (centered horizontally)
-PORTRAIT_WIDTH = 400
-PORTRAIT_HEIGHT = 400
-PORTRAIT_Y = 60  # Moved down to make room for stats bar
-
-# Title screen portraits
-TITLE_PORTRAIT_WIDTH = 500
-TITLE_PORTRAIT_HEIGHT = 700
-TITLE_PORTRAIT_Y = 50
-
-
-# ============================================================================
-# UI - LAYOUT - TEXT BOX
-# ============================================================================
-
-TEXT_BOX_X = 50
-TEXT_BOX_Y = 500
-TEXT_BOX_WIDTH = SCREEN_WIDTH - 100
-TEXT_BOX_HEIGHT = 250
-
-
-# ============================================================================
-# UI - LAYOUT - STATS BAR
-# ============================================================================
-
-STATS_BAR_HEIGHT = 40
-STATS_BAR_PADDING = 10
-STATS_BAR_MARGIN = 5
-
-
-# ============================================================================
-# UI - FONTS
-# ============================================================================
-
-FONT_SIZE_SMALL = 16
-FONT_SIZE_NORMAL = 20
-FONT_SIZE_LARGE = 28
-FONT_SIZE_TITLE = 56
-
-
-# ============================================================================
-# UI - ANIMATION
-# ============================================================================
-
-PORTRAIT_SLIDE_SPEED = 30  # Pixels per frame for portrait slide-in effect
-PORTRAIT_INITIAL_OFFSET = -400  # Starting position off-screen (left)
+# Merchant attribute scales
+MERCHANT_ATTRIBUTE_MIN = 0  # Minimum value for merchant attributes
+MERCHANT_ATTRIBUTE_MAX = 10  # Maximum value for merchant attributes (risk, greed, etc.)
 
 
 # ============================================================================
@@ -121,6 +61,6 @@ CHICKEN_VALUE = 4
 
 # Contraband values
 SILK_VALUE = 8
-PEPPER_VALUE = 8
-MEAD_VALUE = 10
+PEPPER_VALUE = 10
+MEAD_VALUE = 12
 CROSSBOW_VALUE = 15

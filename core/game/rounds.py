@@ -4,14 +4,15 @@ import random
 from dataclasses import dataclass, field
 from typing import Optional
 
+from core.mechanics.goods import Good
 from core.players.merchants import Merchant
 from core.players.sheriff import Sheriff
-from core.mechanics.goods import Good
 
 
 @dataclass
 class Declaration:
     """What the merchant declares (one good type, count)."""
+
     good_id: str
     count: int
 
@@ -19,10 +20,13 @@ class Declaration:
 @dataclass
 class RoundState:
     """State for one round: one merchant, declaration, bribe, inspection result."""
+
     merchant: Merchant
     declaration: Optional[Declaration] = None
     bribe: str = ""
-    bag_actual: list[Good] = field(default_factory=list)  # true contents (for simulation)
+    bag_actual: list[Good] = field(
+        default_factory=list
+    )  # true contents (for simulation)
     sheriff_opens: bool = False
     sheriff_caught_lie: bool = False
     # Summary of contraband that slipped past the sheriff this round.
@@ -46,27 +50,25 @@ def resolve_inspection(
 ) -> tuple[bool, bool]:
     """
     Resolve the inspection phase - determine if sheriff catches a lie.
-    
+
     The sheriff rolls (1-10 + perception) vs merchant's bluff skill.
     If sheriff's roll is higher, they open the bag and catch any lies.
-    
+
     Args:
         sheriff: Sheriff performing the inspection
         merchant: Merchant being inspected
         declaration: What the merchant declared
         actual_goods: What's actually in the bag
         round_state: Optional state to record contraband that slips through
-    
+
     Returns:
         tuple: (sheriff_opens, sheriff_caught_lie)
             - sheriff_opens: Whether the bag was opened
             - sheriff_caught_lie: Whether a lie was detected
     """
     # Simple rule: sheriff rolls perception vs merchant bluff when declaration might be false
-    actual_ids = [g.id for g in actual_goods]
-    declared_ok = (
-        declaration.count == len(actual_goods)
-        and all(g.id == declaration.good_id for g in actual_goods)
+    declared_ok = declaration.count == len(actual_goods) and all(
+        g.id == declaration.good_id for g in actual_goods
     )
     if declared_ok:
         return (False, False)

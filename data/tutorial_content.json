@@ -1,0 +1,155 @@
+{
+  "welcome": {
+    "header": "WELCOME TO THE SHERIFF OF NOTTINGHAM TUTORIAL",
+    "description": "In this tutorial, you'll learn the game mechanics by trying them yourself.",
+    "features": [
+      "Try different choices to see all possible outcomes",
+      "Replay scenarios as many times as you want",
+      "Skip ahead when you understand a concept",
+      "Experiment without consequences (tutorial stats don't carry over)"
+    ],
+    "encouragement": "Don't worry about making mistakes - that's how you learn!",
+    "prompt": "Press Enter to begin..."
+  },
+  "scenarios": [
+    {
+      "id": 1,
+      "name": "Honest Hannah",
+      "merchant_name": "Hannah the Honest",
+      "intro": "A straightforward merchant with legal goods",
+      "description": "An honest apple trader",
+      "declaration": {
+        "good_id": "apple",
+        "count": 4
+      },
+      "actual_goods": ["apple", "apple", "apple", "apple"],
+      "tell": "calm and confident",
+      "has_bribe": false,
+      "learning_points": {
+        "pass": "GOOD CHOICE! Letting honest merchants pass builds your reputation (+1).\nHonest merchants are your allies - treat them well!",
+        "inspect": "OOPS! She was honest. You owe her an 8g penalty and lose reputation (-1).\nInspecting honest merchants damages your authority and costs you gold.",
+        "threaten": "She refuses to negotiate (she's honest and has nothing to hide).\nYou must decide: inspect her anyway or let her pass."
+      }
+    },
+    {
+      "id": 2,
+      "name": "Lying Larry",
+      "merchant_name": "Larry the Smuggler",
+      "intro": "A nervous smuggler with contraband",
+      "description": "A suspicious character",
+      "declaration": {
+        "good_id": "cheese",
+        "count": 3
+      },
+      "actual_goods": ["crossbow", "crossbow", "crossbow"],
+      "tell": "nervous and fidgeting",
+      "has_bribe": true,
+      "bribe_amount": 15,
+      "learning_points": {
+        "pass": "BAD CHOICE! He smuggled 3 crossbows worth 45g! You lose reputation (-2).\nAlways watch for nervous tells - they often indicate lies.",
+        "inspect": "EXCELLENT! You caught him with 3 crossbows. Reputation +2, earned confiscation value.\nCatching smugglers is your primary job and builds your authority.",
+        "threaten": "He nervously offers to increase the bribe to 20g.\nYou can accept the higher bribe or inspect him anyway.",
+        "accept_bribe": "You earned 15g but your reputation drops (-1).\nBribes are profitable but accepting them damages your authority over time."
+      }
+    },
+    {
+      "id": 3,
+      "name": "Clever Silas",
+      "merchant_name": "Silas the Clever",
+      "intro": "A strategic merchant with an interesting offer",
+      "description": "An information broker",
+      "declaration": {
+        "good_id": "apple",
+        "count": 5
+      },
+      "actual_goods": ["apple", "apple", "apple", "apple", "apple"],
+      "tell": "confident and knowing",
+      "has_bribe": true,
+      "bribe_amount": 30,
+      "learning_points": {
+        "pass": "SAFE CHOICE! He had legal goods. Reputation +1.\nSometimes the safest move is to let them pass.",
+        "inspect": "TRICKED! All legal goods - you owe him a 20g penalty. Reputation -1.\nHe baited you into inspecting! Some merchants are very clever.",
+        "threaten": "He calmly says: 'Inspect if you want, Sheriff. I have nothing to hide.'\nHis confidence is suspicious... or is it?",
+        "accept_bribe": "CLEVER PLAY! You earned 30g and he had legal goods anyway.\nBut your reputation still drops (-1) from accepting bribes.\n\nADVANCED STRATEGY: Some merchants bribe even with legal goods\nto build goodwill, test you, or make you look corrupt!"
+      },
+      "narrator_note": "This scenario teaches an advanced concept: Not all bribes mean contraband!\nStrategic merchants may offer bribes with legal goods to manipulate you."
+    }
+  ],
+  "menu": {
+    "header": "What would you like to try?",
+    "choices": {
+      "pass": "PASS merchant through (let them go)",
+      "inspect": "INSPECT their bag (search for contraband)",
+      "threaten": "THREATEN to inspect (negotiate/intimidate)",
+      "accept_bribe": "ACCEPT the bribe (take money, let them pass)",
+      "skip": "SKIP to next scenario",
+      "exit": "EXIT tutorial"
+    },
+    "prompt": "Your choice"
+  },
+  "retry": {
+    "question": "Want to try a different choice with this merchant?",
+    "note": "(The scenario will reset so you can experiment)",
+    "choices": {
+      "retry": "Try again (replay this scenario)",
+      "next": "Next scenario (move forward)",
+      "exit": "Exit tutorial"
+    },
+    "prompt": "Your choice"
+  },
+  "game_over": {
+    "header": "GAME OVER (In Real Game)",
+    "message": "Your reputation dropped to 0! In the real game, you would lose.",
+    "restoration": "But since this is the tutorial, we'll restore your reputation to 5.",
+    "tip": "TIP: Keep your reputation above 0 to stay in the game!",
+    "prompt": "Press Enter to continue..."
+  },
+  "complete": {
+    "header": "TUTORIAL COMPLETE!",
+    "summary": "You've learned the core mechanics of Sheriff of Nottingham:",
+    "lessons": [
+      "Letting honest merchants pass builds reputation",
+      "Catching smugglers earns reputation and gold",
+      "Bribes are profitable but damage reputation",
+      "Some merchants use clever tricks (legal goods + bribe)"
+    ],
+    "ready": "You're ready to play the real game!",
+    "start_prompt": "Ready to start the real game?",
+    "start_choices": {
+      "yes": "Yes, start the game!",
+      "no": "No, return to main menu"
+    }
+  },
+  "execution": {
+    "header": "EXECUTING",
+    "stats_header": "Current Tutorial Stats:",
+    "stats_labels": {
+      "reputation": "Reputation",
+      "gold": "Gold",
+      "bribes": "Bribes Accepted",
+      "inspections": "Inspections"
+    },
+    "learning_header": "WHAT YOU LEARNED:"
+  },
+  "merchant_arrival": {
+    "approaches": "approaches the gate...",
+    "tell_label": "Tell:",
+    "declares": "declares:",
+    "bribe_offer": "quietly offers a"
+  },
+  "scenario_header": {
+    "prefix": "SCENARIO",
+    "separator": "/"
+  },
+  "messages": {
+    "resetting": "Resetting scenario...",
+    "skipping": "Skipping to next scenario...",
+    "exiting": "Exiting tutorial. You can always restart it from the main menu!",
+    "invalid_choice": "Invalid choice. Please try again.",
+    "threaten_bribe_increase": "You threaten to inspect {name}'s bag...\n{name} nervously offers to increase the bribe to {amount}g!\n(In the real game, you could negotiate further or inspect)",
+    "threaten_no_bribe": "You threaten to inspect {name}'s bag...\n{name} stands firm: 'I have nothing to hide, Sheriff.'\n(In the real game, you could still inspect or let them pass)",
+    "accept_bribe_action": "You accept the {amount}g bribe from {name}...",
+    "sheriff_gold": "Sheriff Gold: {gold}g (+{amount}g)",
+    "sheriff_reputation": "Sheriff Reputation: {reputation} (-1)"
+  }
+}
